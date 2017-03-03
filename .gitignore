@@ -1,1 +1,5 @@
 *.odp#
+.idea
+.idea/
+*.pyc
+*.sqlite3
