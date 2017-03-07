@@ -10,6 +10,7 @@ class UserProfile(models.Model):
     mobile_number = models.CharField(max_length=15)
     two_factor = models.BooleanField(default=False)
     theme = models.IntegerField(default=0)
+    online_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username

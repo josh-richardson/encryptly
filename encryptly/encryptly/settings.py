@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import pymysql
+pymysql.install_as_MySQLdb()
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,12 +78,24 @@ WSGI_APPLICATION = 'encryptly.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+# I'd user environment variables here, but getting them through to pycharm is a disgusting process, so falling back to file system.
+with open('credentials.txt', 'r') as credentials_file:
+    data = credentials_file.read()
+    DATABASES = {
+        'default': {
+            'CONN_MAX_AGE': 0,
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': 'localhost',
+            'NAME': 'encryptly_backend',
+            # 'NAME': 'project.db',
+            'PASSWORD': data[data.index(":") + 1:],
+            'PORT': '',
+            'USER': data[:data.index(":")]
+        }
     }
-}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
