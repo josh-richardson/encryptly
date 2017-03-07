@@ -1,5 +1,5 @@
-{% load staticfiles %}
-
+{% load static %}
+{% load tags %}
 <!DOCTYPE html>
 
 <html>
@@ -17,27 +17,65 @@
     <meta name="author" content="">
 
     <!-- Bootstrap Core CSS -->
-    <link href="{% static "/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href={% static "/font-awesome/css/font-awesome.css" %} rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <link href="{% static "font-awesome/css/font-awesome.css" %}" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
-<script src="{% static "js/jquery-3.1.1.js" %}"></script>
+<script src="{% static "js/jquery-3.1.1.slim.js" %}"></script>
+<script src="{% static "js/tether.min.js" %}"></script>
+<script src="{% static "js/bootstrap.js" %}"></script>
 
-<p>Base template</p>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Encryptly</a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% active_handler "index" %}">
+                <a class="nav-link" href="{% url "index" %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item {% active_handler "about" %}">
+                <a class="nav-link" href="{% url "about" %}">About</a>
+            </li>
+            <li class="nav-item {% active_handler "faq" %}">
+                <a class="nav-link" href="{% url "faq" %}">FAQ</a>
+            </li>
+            <li class="nav-item {% active_handler "contact" %}">
+                <a class="nav-link" href="{% url "contact" %}">Contact</a>
+            </li>
+            {% comment %}<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>{% endcomment %}
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item {% active_handler "login" %}">
+                <a class="nav-link" href="{% url "login" %}">Login</a>
+            </li>
+            <li class="nav-item {% active_handler "register" %}">
+                <a class="nav-link" href="{% url "register" %}">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 {% block body_block %}
+
+
 
 {% endblock %}
 
