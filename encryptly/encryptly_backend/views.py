@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, "encryptly_backend/base.html", {})
+    return render(request, "encryptly_backend/index.html", {})
 
 
 
