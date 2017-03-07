@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import pymysql
-pymysql.install_as_MySQLdb()
 
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'encryptly_backend',
+    'grunt'
 ]
 
 MIDDLEWARE = [
@@ -95,8 +96,6 @@ with open('credentials.txt', 'r') as credentials_file:
         }
     }
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -136,3 +135,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+

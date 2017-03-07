@@ -1,0 +1,24 @@
+//SCSS media query mixins
+@mixin mobile-only {
+  @media (max-width: $mq-mobile-landscape) {
+    @content;
+  }
+}
+
+@mixin desktop-and-up {
+  @media only screen and (min-width: $mq-desktop) {
+    @content;
+  }
+}
+
+@mixin desktop-and-below {
+	@media only screen and (max-width : $mq-desktop) {
+		@content;
+	}
+}
+
+@mixin tablet-landscape-and-up {
+	@media only screen and (min-width : $mq-tablet-portrait + 1) {
+		@content;
+	}
+}
