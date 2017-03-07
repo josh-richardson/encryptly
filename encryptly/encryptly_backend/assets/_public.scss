@@ -1,0 +1,45 @@
+//CSS for pages which are publicly accessible without logging in
+
+.image-impress {
+  max-width: 90%;
+  display: block;
+  margin: 0 auto;
+}
+
+.row.exhibit {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.container.exhibit {
+  padding-top: 3%;
+  width: 90%;
+}
+
+p.encryptly-header {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+
+p.encryptly-sub {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.login {
+  position:relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.desktop-only {
+  display: none;
+
+  @include desktop-and-up {
+    display:block;
+  }
+
+}

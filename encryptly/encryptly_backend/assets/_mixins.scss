@@ -1,0 +1,11 @@
+@mixin mobile-only {
+  @media (max-width: $mq-mobile-landscape) {
+    @content;
+  }
+}
+
+@mixin desktop-and-up {
+  @media only screen and (min-width: $mq-desktop) {
+    @content;
+  }
+}
