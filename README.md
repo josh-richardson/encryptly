@@ -10,3 +10,4 @@ Before running the application from PyCharm, a few things are required:
 * If you're editing the CSS, make sure you edit assets/encryptly.scss instead of the file in /static/css because your changes will be overwritten if you edit the latter. If you want changes to propogate to the website, run SCSS on the scss file.
 * If you want to compress the CSS so there aren't any duplicated media queries, install NodeJs and NPM, then cd to the encryptly directory, and execute: `npm install grunt --save-dev && npm install grunt-combine-mq --save-dev`
 * You'll now be able to run grunt which will optimize the css according to the routine in gruntfile.js. Optionally, afterwards, you can configure a pre-build task to run grunt 
+* Take a look a TODO.md if you want to see what still needs to be done
