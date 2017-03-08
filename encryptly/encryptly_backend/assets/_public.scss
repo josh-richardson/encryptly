@@ -18,7 +18,7 @@
     margin-top: 30px;
   }
   @include desktop-and-up() {
-    margin-top: 100px;
+    margin-top: 80px;
   }
 }
 
@@ -151,3 +151,20 @@ p.lead {
   text-align: justify;
 }
 
+.img-circle {
+  border-radius:50%;
+}
+
+.team-profile > img {
+  margin-bottom:10px;
+
+}
+
+.container.about-us {
+  margin-bottom: 100px;
+}
+
+.team-profile > p {
+  text-align:justify;
+  text-align-last: center;
+}

@@ -108,6 +108,23 @@ hr {
 
 p.lead {
   text-align: justify;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.team-profile > img {
+  margin-bottom: 10px;
+}
+
+.container.about-us {
+  margin-bottom: 100px;
+}
+
+.team-profile > p {
+  text-align: justify;
+  text-align-last: center;
 }/*# sourceMappingURL=encryptly.css.map */@media only screen and (min-width: 769px) {
   .container.exhibit {
     width: 90%;
@@ -116,7 +133,7 @@ p.lead {
 
 @media only screen and (min-width: 1200px) {
   .row.exhibit:not(:first-child) {
-    margin-top: 100px;
+    margin-top: 80px;
   }
 
   .col-xl-3.feature {

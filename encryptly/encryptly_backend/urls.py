@@ -6,7 +6,7 @@ from encryptly_backend import views
 urlpatterns = [
     url(r'^$', lambda r: HttpResponseRedirect('index')),
     url(r'^index/$', views.index, name='index'),
-    url(r'^about/$', views.index, name='about'),
+    url(r'^about/$', views.about, name='about'),
     url(r'^faq/$', views.index, name='faq'),
     url(r'^contact/$', views.index, name='contact'),
 
