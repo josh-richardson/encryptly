@@ -10,3 +10,7 @@ def index(request):
 
 def about(request):
     return render(request, "encryptly_backend/about.html", {})
+
+
+def faq(request):
+    return render(request, "encryptly_backend/faq.html", {})

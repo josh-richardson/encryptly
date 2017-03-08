@@ -112,12 +112,11 @@ footer {
   padding-top: 30px;
   padding-bottom: 30px;
   margin-top: 20px;
-
+  .container {
+    width: 90%;
+  }
 }
 
-footer > .container {
-  width: 90%;
-}
 
 
 
@@ -153,11 +152,9 @@ p.lead {
 
 .img-circle {
   border-radius:50%;
-}
-
-.team-profile > img {
-  margin-bottom:10px;
-
+  img {
+    margin-bottom:10px;
+  }
 }
 
 .container.about-us {
@@ -168,3 +165,11 @@ p.lead {
   text-align:justify;
   text-align-last: center;
 }
+
+.question {
+  padding-top: 30px;
+  p {
+    margin-bottom: 0.3rem;
+  }
+}
+
