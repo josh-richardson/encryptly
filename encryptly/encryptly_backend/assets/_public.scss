@@ -1,4 +1,5 @@
 //CSS for pages which are publicly accessible without logging in
+//todo: clean up this disgusting CSS
 
 .image-impress {
   max-width: 90%;
@@ -21,10 +22,9 @@
   }
 }
 
-
 .feature > p:nth-child(2) {
-  margin-top:15px;
-  font-weight:400;
+  margin-top: 15px;
+  font-weight: 400;
 }
 
 .feature > p:not(:nth-child(2)) {
@@ -32,9 +32,8 @@
 }
 
 .row.exhibit:nth-child(2) {
-  max-width:1600px;
+  max-width: 1600px;
 }
-
 
 .container.exhibit {
   padding-top: 3%;
@@ -56,7 +55,7 @@ p.encryptly-sub {
 }
 
 .login {
-  position:relative;
+  position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -64,7 +63,7 @@ p.encryptly-sub {
 .col-xl-3.feature {
   text-align: center;
   @include desktop-and-below() {
-    padding-top:20px;
+    padding-top: 20px;
   }
   @include desktop-and-up() {
     padding-left: 2%;
@@ -72,11 +71,83 @@ p.encryptly-sub {
   }
 }
 
-
+div.right_align {
+  text-align: right;
+}
 
 .desktop-only {
   display: none;
   @include desktop-and-up() {
-    display:block;
+    display: block;
   }
 }
+
+.fa-10x {
+  font-size: 10rem;
+}
+
+div.right_align > .fa-10x {
+  padding-left: 20px;
+}
+
+div.col-icons:not(.right_align) > .fa-10x {
+  padding-right: 20px;
+}
+
+@media (max-width: 1160px) {
+  .col-icons {
+    display: none;
+  }
+
+  .col-grow {
+    max-width: 100%;
+    width: 100%;
+    flex-basis: 100%;
+  }
+}
+
+footer {
+  border-top: 1px solid #eee;
+  background-color: #f7f7f7;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-top: 20px;
+
+}
+
+footer > .container {
+  width: 90%;
+}
+
+
+
+.col-md-4.col-footer:nth-child(1) {
+  text-align: left;
+  @include tablet-landscape-and-down {
+    text-align: center;
+  }
+}
+
+.col-md-4.col-footer:nth-child(2) {
+  text-align: center;
+}
+
+.col-md-4.col-footer:nth-child(3) {
+  text-align: right;
+  @include tablet-landscape-and-down {
+    text-align: center;
+  }
+}
+
+.fa-thin {
+  -webkit-text-stroke: 8px white;
+}
+
+hr {
+  margin-top: 3%;
+}
+
+p.lead {
+  text-align: justify;
+}
+
