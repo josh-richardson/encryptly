@@ -166,10 +166,28 @@ p.lead {
   text-align-last: center;
 }
 
+.team-profile > h3 {
+  margin-top: 12px;
+}
+
+
 .question {
   padding-top: 30px;
   p {
     margin-bottom: 0.3rem;
   }
 }
+
+.question:last-of-type{
+    margin-bottom: 100px;
+}
+
+#contact_form {
+  padding-top: 50px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+
+}
+
 

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 
-from encryptly_backend.models import UserProfile
+from encryptly_backend.models import UserProfile, ContactRequest
 
 
 class UserForm(forms.ModelForm):
@@ -43,3 +43,19 @@ class ProfileForm(forms.ModelForm):
         fields = ('public_key', 'private_key', 'mobile_number', 'two_factor')
 
 
+class ContactForm(forms.ModelForm):
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': "form-control"}), max_length=3000)
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': "form-control", 'placeholder': "(optional)"}),
+                             required=False)
+
+    class Meta:
+        model = ContactRequest
+        fields = ("message", "email")
+
+    def clean(self):
+        message = self.cleaned_data.get("message")
+
+        if len(message) == 0:
+            raise forms.ValidationError("No message specified!")
+
+        return self.cleaned_data

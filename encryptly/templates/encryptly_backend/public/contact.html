@@ -1,0 +1,36 @@
+{% extends 'encryptly_backend/public/public_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Index
+{% endblock %}
+
+{% block body_block %}
+    <div class="container exhibit">
+
+        <div class="row exhibit">
+            <div class="col-lg-12">
+                <h1 class="page-header">Contact us</h1>
+                {% if messages %}
+                    <br />
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+
+                <form id="contact_form" method="POST" action="{% url 'contact' %}">
+                    {% csrf_token %}
+                    {{ contact_form.as_p }}
+                    <button class="btn btn-default" type="submit">Send</button>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

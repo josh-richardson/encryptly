@@ -15,3 +15,8 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
+class ContactRequest(models.Model):
+
+    message = models.CharField(max_length=4096)
+    email = models.EmailField(blank=True, null=True)

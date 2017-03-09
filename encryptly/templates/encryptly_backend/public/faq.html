@@ -1,0 +1,65 @@
+{% extends 'encryptly_backend/public/public_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Index
+{% endblock %}
+
+{% block body_block %}
+    <div class="container exhibit">
+
+        <div class="row exhibit">
+            <div class="col-lg-12">
+                <h1 class="page-header">FAQ</h1>
+            </div>
+            <div class="col-lg-12 text-justify">
+                <div class="question">
+                    <p class="lead">What is Encryptly?</p>
+                    <p>Encryptly is an instant messaging application designed with security and privacy in mind. All
+                        communication is encrypted before it leaves your device, so the server has zero knowledge of the
+                        content of any given conversation. Encryptly allows you to communicate one-to-one or to multiple
+                        people in a group. Encryptly can be used on multiple devices simultaneously; you can exchange
+                        text, images, emojis and arbitrary files under the size of 25MB.</p>
+                </div>
+                <div class="question">
+                    <p class="lead">How does Encryptly work?</p>
+                    <p>When you first sign up to Encryptly, a unique RSA public-private key pair is generated in your
+                        browser (not on our servers), which is used for key exchange for encrypting and decrypting
+                        messages. The public key is sent to our server and is freely available so that other users can
+                        contact you. The private key is encrypted using AES-256 with the password being the decryption
+                        key that you specify. This decryption key is never sent to us, and always stays on your computer
+                        after you enter it. Whenever you sign in, you are first authenticated with the server using your
+                        password. The encrypted version of your private key is then sent to your browser over SSL for
+                        decryption. Your messages will only be viewable if the decryption key for the private key is
+                        correct, and since this never leaves your browser, you can be sure that your messages are
+                        secure.</p>
+                </div>
+
+                <div class="question">
+                    <p class="lead">Can I use Encryptly on my phone?</p>
+                    <p>Yes! The website has been designed from the ground up to be used on mobile, and you can even get
+                        push notifications and native-like functionality by choosing 'Add to Home screen' if you use
+                        Chrome on Android. This will add an Encryptly icon to your home screen.</p>
+                </div>
+
+                <div class="question">
+                    <p class="lead">Who is behind encryptly? How can I trust you?</p>
+                    <p>We're a team of students - take a look at our About us page. We encourage you not to trust us,
+                        but to look at the source code of the application, improve it, point out flaws, and even roll
+                        your own server or website running Encryptly's backend.</p>
+                </div>
+
+                <div class="question">
+                    <p class="lead">What data do you store?</p>
+                    <p>In terms of your messages, we only store encrypted version of them until you delete them. We cannot read these messages, they just look like random data to us. Login events and page views are not logged, and all resources are served by our servers, meaning that 3rd parties cannot log your page views*. We store your username, a hashed version of your password, and your public and (encrypted) private key at a minimum. If you've enabled two-factor authentication, we store your phone number, if you've enabled your online status, we store your online status (but we do not log historical data about online status). That's all.</p>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

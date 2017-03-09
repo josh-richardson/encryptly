@@ -9,6 +9,8 @@ Web pages:
 - [ ] Sign up
 - [ ] Messaging interface
 - [ ] Themes
+- [ ] Logo & Favicon
+- [ ] Chrome manifest for app
 
 Frontend JavaScript:
 - [ ] Keypair generation
@@ -28,3 +30,4 @@ Backend development:
 - [ ] One-to-one messaging
 - [ ] Online statuses - Redis or Memcached
 - [ ] Image/other media handling
+- [ ] Chrome push notifications

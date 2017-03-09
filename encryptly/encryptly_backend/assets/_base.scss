@@ -1,9 +1,20 @@
 //CSS universal to the whole site is here
 
-
-
 .default-form {
   max-width: 400px;
   margin: 0 auto 8px;
   display: block;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -105px;
+}
+.footer,
+.push {
+  height: 105px;
 }
