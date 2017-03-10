@@ -4,7 +4,7 @@ Web pages:
 - [x] Index
 - [x] About us
 - [x] FAQ
-- [ ] Contact
+- [x] Contact
 - [ ] Login (+2FA)
 - [ ] Sign up
 - [ ] Messaging interface
@@ -15,7 +15,7 @@ Web pages:
 Frontend JavaScript:
 - [ ] Keypair generation
 - [ ] Login form logic
-- [ ] Sign up form logic
+- [x] Sign up form logic
 - [ ] AES Encrypt & Decrypt
 - [ ] Implementation of websockets for messaging
 - [ ] Friend requests

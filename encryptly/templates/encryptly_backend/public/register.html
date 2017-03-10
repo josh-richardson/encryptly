@@ -1,0 +1,49 @@
+{% extends 'encryptly_backend/public/public_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+{% block body_block %}
+    <div class="container exhibit">
+
+        <div class="card card-form">
+            <div class="card-header">
+                Register
+            </div>
+            <div class="card-block">
+                <form id="register_form" data-validate="parsley">
+                    {% include "encryptly_backend/sub_templates/form-messages.html" %}
+                    <fieldset>
+                        {% csrf_token %}
+                        {{ user_form.as_p }}
+                        <p>
+                            <input type="password" id="decrpytion-key" size="50" class="form-control" title="Decryption key" placeholder="Decryption key" name="decryption-key" required/>
+                        </p>
+                        <p>
+                            <input type="password" id="decrpytion-key-confirm" size="50" class="form-control" title="Confirm Decryption key" name="decryption-key-confirm" placeholder="Confirm Decryption key" required/>
+                        </p>
+
+
+
+                        {% for field in profile_form.visible_fields %}
+                            <p>
+                                {{ field }} {{ field.label }}
+                            </p>
+                        {% endfor %}
+                    </fieldset>
+{#                    <button class="btn btn-outline-primary" type="submit">Next</button>#}
+                    <button id="register-next" class="btn btn-outline-primary pull-right" type="button">Next</button>
+                </form>
+                <div class="key-generation text-center">
+                    <p>Now generating a unique RSA-4096 keypair</p>
+                    <div class="loader"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -11,20 +11,13 @@
         <div class="row exhibit">
             <div class="col-lg-12">
                 <h1 class="page-header">Contact us</h1>
-                {% if messages %}
-                    <br />
-                    {% for message in messages %}
-                        <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
 
 
                 <form id="contact_form" method="POST" action="{% url 'contact' %}">
+                    {% include "encryptly_backend/sub_templates/form-messages.html" %}
                     {% csrf_token %}
                     {{ contact_form.as_p }}
-                    <button class="btn btn-default" type="submit">Send</button>
+                    <button class="btn btn-outline-primary" type="submit">Send</button>
                 </form>
             </div>
 

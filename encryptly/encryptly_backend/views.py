@@ -4,7 +4,7 @@ from django.contrib import messages
 # Create your views here.
 from django.shortcuts import render
 
-from encryptly_backend.forms import ContactForm
+from encryptly_backend.forms import ContactForm, UserForm, ProfileForm
 
 
 def index(request):
@@ -22,7 +22,6 @@ def faq(request):
 def contact(request):
     if request.method == "POST":
         contact_form = ContactForm(data=request.POST)
-
         if contact_form.is_valid():
             contact_form.save()
             messages.info(request, 'Form submission successful', 'alert-success')
@@ -33,5 +32,10 @@ def contact(request):
     return render(request, "encryptly_backend/public/contact.html", {"contact_form": contact_form})
 
 
+def register(request):
+    return render(request, "encryptly_backend/public/register.html", {"profile_form":ProfileForm(), "user_form": UserForm()})
+
+
 def test_main(request):
     return render(request, "encryptly_backend/private/main.html", {})
+

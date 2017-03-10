@@ -1,6 +1,8 @@
 {% extends "encryptly_backend/base.html" %}
 
 
+{% load static %}
+
 
 {% block footer %}
 
@@ -20,6 +22,7 @@
         </div>
     </div>
 </footer>
+<script src="{% static "js/parsley.min.js" %}"></script>
 
-
+<script src="{% static "js/encryptly_public.js" %}"></script>
 {% endblock %}
