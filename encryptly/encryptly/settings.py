@@ -95,9 +95,9 @@ with open('credentials.txt', 'r') as credentials_file:
             'HOST': 'localhost',
             'NAME': 'encryptly_backend',
             # 'NAME': 'project.db',
-            'PASSWORD': data[data.index(":") + 1:],
+            'PASSWORD': data[data.index(":") + 1:].strip(),
             'PORT': '',
-            'USER': data[:data.index(":")]
+            'USER': data[:data.index(":")].strip()
         }
     }
 
