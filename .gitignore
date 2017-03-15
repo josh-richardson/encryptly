@@ -5,3 +5,4 @@
 *.sqlite3
 credentials.txt
 node_modules/
+.sass-cache/

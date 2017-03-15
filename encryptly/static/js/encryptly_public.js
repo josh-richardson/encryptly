@@ -2,9 +2,25 @@
  * Created by joshua on 09/03/17.
  */
 
+window.Parsley.addValidator('username', {
+  validateString: function(value) {
+
+    return value.split('').reverse().join('') === value;
+  },
+  messages: {
+    en: 'This string is not the reverse of itself',
+  }
+});
+
+
+    // var posting = $.post(
+    //     "/flow/",
+    //     { number: "2" }
+    // );
+
+
 $("#id_public_key").removeAttr("required");
 $("#id_private_key").removeAttr("required");
-
 
 $("#register-next").click(function () {
     var form = $("#register_form");
@@ -20,7 +36,6 @@ $("#register-next").click(function () {
                 decryptionKeyInput.remove();
                 $('#decryption-key-confirm').remove();
                 $('#register_form').submit();
-                //Submit using AJAX?
             });
 
         });
