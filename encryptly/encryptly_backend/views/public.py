@@ -1,10 +1,13 @@
-from django.http import HttpResponse
+import memcache
 from django.contrib import messages
-
-# Create your views here.
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from encryptly_backend.forms import ContactForm, UserForm, ProfileForm
+
+client = memcache.Client([('127.0.0.1', 11211)])
 
 
 def index(request):
@@ -55,3 +58,14 @@ def register(request):
 def test_main(request):
     return render(request, "encryptly_backend/private/main.html", {})
 
+
+@csrf_exempt
+def user_test(request, test_username):
+    client_address_key = "user-check-" + request.META['HTTP_X_FORWARDED_FOR']
+    existing_entry = client.get(client_address_key)
+
+    if not existing_entry or int(existing_entry) <= 5:
+        client.set(client_address_key, int(existing_entry) + 1, 1600)
+        return HttpResponse("true" if User.objects.exists(username=test_username) else "false")
+    else:
+        return HttpResponse("denied")
