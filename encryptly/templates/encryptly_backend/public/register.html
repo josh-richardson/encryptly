@@ -14,7 +14,7 @@
                 Register
             </div>
             <div class="card-block">
-                <form id="register_form" data-validate="parsley">
+                <form id="register_form" method="post" action="{% url 'register' %}" data-validate="parsley">
                     {% include "encryptly_backend/sub_templates/form-messages.html" %}
                     <fieldset>
                         {% csrf_token %}
@@ -34,7 +34,7 @@
                             </p>
                         {% endfor %}
                     </fieldset>
-                    <button id="register-next" class="btn btn-outline-primary pull-right" type="button">Next</button>
+                    <button id="register-next" class="btn btn-outline-primary pull-right" type="button">Register</button>
                 </form>
                 <div class="key-generation text-center">
                     <p>Now generating a unique RSA-4096 keypair</p>

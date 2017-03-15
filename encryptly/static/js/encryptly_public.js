@@ -12,11 +12,14 @@ $("#register-next").click(function () {
         form.fadeOut("slow", function () {
             $(".key-generation").fadeIn("slow");
             var crypt = new JSEncrypt({default_key_size: 4096});
-            crypt.getKey(function () {
+            crypt.getKey(function() {
+                var decryptionKeyInput = $('#decryption-key');
                 console.log("Generated a key");
-                $('#id_private_key').val(CryptoJS.AES.encrypt(crypt.getPrivateKey(), $("#decryption-key").val()).toString());
+                $('#id_private_key').val(CryptoJS.AES.encrypt(crypt.getPrivateKey(), decryptionKeyInput.val()).toString());
                 $('#id_public_key').val(crypt.getPublicKey());
-
+                decryptionKeyInput.remove();
+                $('#decryption-key-confirm').remove();
+                $('#register_form').submit();
                 //Submit using AJAX?
             });
 

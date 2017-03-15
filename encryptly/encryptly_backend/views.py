@@ -27,12 +27,28 @@ def contact(request):
             messages.info(request, 'Form submission successful', 'alert-success')
         else:
             messages.info(request, 'The data you submitted was invalid', 'alert-danger')
-
-    contact_form = ContactForm()
+    else:
+        contact_form = ContactForm()
     return render(request, "encryptly_backend/public/contact.html", {"contact_form": contact_form})
 
 
 def register(request):
+    if request.method == 'POST':
+        print(request.POST)
+        profile_form = ProfileForm(data=request.POST)
+        user_form = UserForm(data=request.POST)
+        if profile_form.is_valid() and user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+        else:
+            print(profile_form.errors)
+            print(user_form.errors)
+
     return render(request, "encryptly_backend/public/register.html", {"profile_form":ProfileForm(), "user_form": UserForm()})
 
 
