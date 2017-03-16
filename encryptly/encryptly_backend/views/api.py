@@ -16,6 +16,7 @@ def user_exists(request):
             existing_entry = client.get(client_address_key)
             if not existing_entry or int(existing_entry) <= 5:
                 return_dict['allowed'] = True
-                client.set(client_address_key, int(existing_entry) + 1 if existing_entry else 1, 8)
-                if User.objects.filter(username=username).count == 0: return_dict['exists'] = True
+                print("Users with username: " + str(User.objects.filter(username=username).count()))
+                client.set(client_address_key, int(existing_entry) + 1 if existing_entry else 1, 60)
+                if User.objects.filter(username=username).count() != 0: return_dict['exists'] = True
     return JsonResponse(return_dict)
