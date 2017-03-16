@@ -6,3 +6,4 @@
 credentials.txt
 node_modules/
 .sass-cache/
+migrations/
