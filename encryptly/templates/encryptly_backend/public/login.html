@@ -1,0 +1,43 @@
+{% extends 'encryptly_backend/public/public_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="container exhibit">
+
+        <div class="card card-form">
+            <div class="card-header">
+                Log in
+            </div>
+            <div class="card-block">
+                <form id="register_form" method="post" action="{% url 'login' %}" data-validate="parsley">
+                    {% include "encryptly_backend/sub_templates/form-messages.html" %}
+                    <fieldset>
+                        {% csrf_token %}
+                        <p>
+                            <input type="password" id="decryption-key" size="50" class="form-control" title="Decryption key" placeholder="Decryption key" name="decryption-key" required/>
+                        </p>
+                        <p>
+                            <input type="password" id="decryption-key-confirm" data-parsley-equalto="#decryption-key" size="50" class="form-control" title="Confirm Decryption key" name="decryption-key-confirm" placeholder="Confirm Decryption key" required/>
+                        </p>
+
+                    </fieldset>
+                    <button id="register-next" class="btn btn-outline-primary pull-right" type="button">Register</button>
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+    <script src="{% static "js/cryptojs/core-min.js" %}"></script>
+    <script src="{% static "js/cryptojs/enc-base64-min.js" %}"></script>
+    <script src="{% static "js/cryptojs/enc-utf16-min.js" %}"></script>
+    <script src="{% static "js/cryptojs/aes.js" %}"></script>
+    <script src="{% static "js/cryptojs/jsencrypt.js" %}"></script>
+
+{% endblock %}

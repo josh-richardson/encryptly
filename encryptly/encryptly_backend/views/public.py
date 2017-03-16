@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from encryptly_backend.forms import ContactForm, UserForm, ProfileForm
 from encryptly_backend.views import api
 
@@ -42,9 +42,16 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
+
+            messages.info(request, 'Account created successfully. You may now log in!', 'alert-success')
+            return redirect("login")
         else:
             print(profile_form.errors)
             print(user_form.errors)
 
     return render(request, "encryptly_backend/public/register.html",
                   {"profile_form": ProfileForm(), "user_form": UserForm()})
+
+
+def login(request):
+    return render(request, "encryptly_backend/public/login.html", {})
