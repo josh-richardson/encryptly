@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'encryptly_backend',
-    'grunt'
+    'grunt',
+    'channels',
 ]
 
 MIDDLEWARE = [

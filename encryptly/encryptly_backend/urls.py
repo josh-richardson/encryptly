@@ -16,6 +16,7 @@ urlpatterns = [
 
 
     url(r'^main/$', views.private.test_main, name='test_main'),
+    url(r'^themes/$', views.private.test_themes, name='test_themes'),
 
     url(r'^user/login/$', views.public.index, name='user_login'),
 
