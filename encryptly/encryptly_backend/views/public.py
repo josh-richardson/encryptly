@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from encryptly_backend.forms import ContactForm, UserForm, ProfileForm
+from encryptly_backend.forms import ContactForm, UserForm, ProfileForm, LoginForm
 from encryptly_backend.views import api
 
 
@@ -54,4 +54,9 @@ def register(request):
 
 
 def login(request):
-    return render(request, "encryptly_backend/public/login.html", {})
+    if request.method == 'POST':
+        login_form = LoginForm(data=request.POST)
+
+        # if login_form.is_valid():
+
+    return render(request, "encryptly_backend/public/login.html", {"login_form": LoginForm()})

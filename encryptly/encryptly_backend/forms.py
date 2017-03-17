@@ -34,7 +34,6 @@ class ProfileForm(forms.ModelForm):
     two_factor = forms.BooleanField(label="Enable two-factor authentication", widget=CheckboxInput(), required=False)
     mobile_number = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Mobile number"}), validators=[phone_regex], max_length=15, required=False)
 
-
     class Meta:
         model = UserProfile
         fields = ('public_key', 'private_key', 'two_factor', 'mobile_number')
@@ -55,3 +54,11 @@ class ContactForm(forms.ModelForm):
             raise forms.ValidationError("No message specified!")
 
         return self.cleaned_data
+
+
+class LoginForm(forms.ModelForm):
+    username = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Username", 'data-parsley-type': "alphanum"}))
+    password = forms.CharField(label="", widget=forms.PasswordInput(attrs={'class': "form-control", 'placeholder': "Password"}), max_length=100, min_length=10)
+    two_factor_key = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Username", 'data-parsley-type': "alphanum"}), min_length=6, max_length=6, required=False)
+
+

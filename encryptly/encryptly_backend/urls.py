@@ -11,17 +11,17 @@ urlpatterns = [
     url(r'^faq/$', views.public.faq, name='faq'),
     url(r'^contact/$', views.public.contact, name='contact'),
 
-    url(r'^login/$', views.public.index, name='login'),
+    url(r'^login/$', views.public.login, name='login'),
     url(r'^register/$', views.public.register, name='register'),
 
 
     url(r'^main/$', views.private.test_main, name='test_main'),
 
-    url(r'^user/login/$', views.public.index, name='user_login'),
+    url(r'^user/login/$', views.api.user_exists, name='user_login'),
 
 
 
-    url(r'^logout/$', views.public.index, name='logout'),
+    url(r'^logout/$', views.public.login, name='logout'),
     url(r'^user/exists/$', views.api.user_exists, name='user_exists'),
 
 ]
