@@ -2,12 +2,14 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.forms import CheckboxInput
+from django.urls import reverse
+from django.urls import reverse_lazy
 
 from encryptly_backend.models import UserProfile, ContactRequest
 
 
 class UserForm(forms.ModelForm):
-    username = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Username", 'data-parsley-type': "alphanum", 'data-parsley-remote': "/user/exists/", 'data-parsley-remote-validator': "validateUsername", 'data-parsley-remote-options': '{ "type": "POST" }', 'data-parsley-remote-message': "This username appears to already exist."}), max_length=15)
+    username = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Username", 'data-parsley-type': "alphanum", 'data-parsley-remote': reverse_lazy("user_exists"), 'data-parsley-remote-validator': "validateUsername", 'data-parsley-remote-options': '{ "type": "POST" }', 'data-parsley-remote-message': "This username appears to already exist."}), max_length=15)
     password = forms.CharField(label="", widget=forms.PasswordInput(attrs={'class': "form-control", 'placeholder': "Password"}), max_length=100, min_length=10, )
     confirm_password = forms.CharField(label="", widget=forms.PasswordInput(attrs={'class': "form-control", 'placeholder': "Confirm password", 'data-parsley-equalto': "#id_password"}), max_length=100, min_length=10)
 
@@ -54,11 +56,4 @@ class ContactForm(forms.ModelForm):
             raise forms.ValidationError("No message specified!")
 
         return self.cleaned_data
-
-
-class LoginForm(forms.ModelForm):
-    username = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Username", 'data-parsley-type': "alphanum"}))
-    password = forms.CharField(label="", widget=forms.PasswordInput(attrs={'class': "form-control", 'placeholder': "Password"}), max_length=100, min_length=10)
-    two_factor_key = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Username", 'data-parsley-type': "alphanum"}), min_length=6, max_length=6, required=False)
-
 

@@ -6,7 +6,7 @@ Web pages:
 - [x] FAQ
 - [x] Contact
 - [ ] Login (+2FA)
-- [ ] Sign up
+- [x] Sign up
 - [ ] Messaging interface
 - [ ] Themes
 - [ ] Logo & Favicon

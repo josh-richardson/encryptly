@@ -3,3 +3,4 @@ django
 grunt
 python-memcached
 channels
+django-js-reverse

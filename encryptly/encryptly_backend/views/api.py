@@ -20,4 +20,3 @@ def user_exists(request):
                 if User.objects.filter(username=username).count() != 0: return_dict['exists'] = True
     return JsonResponse(return_dict)
 
-

@@ -18,11 +18,13 @@ urlpatterns = [
     url(r'^main/$', views.private.test_main, name='test_main'),
     url(r'^themes/$', views.private.test_themes, name='test_themes'),
 
-    url(r'^user/login/$', views.api.user_exists, name='user_login'),
 
 
 
     url(r'^logout/$', views.public.login, name='logout'),
+
     url(r'^user/exists/$', views.api.user_exists, name='user_exists'),
+    url(r'^user/login/$', views.api.user_exists, name='user_login'),
+
 
 ]

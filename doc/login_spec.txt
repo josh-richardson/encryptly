@@ -1,0 +1,30 @@
+The user has to be able to log in to the website.
+
+There are several factors of authentication before a login can be accepted:
+-Username and password
+-2FA key
+-User must be able to prove that they are able to decrypt their private key
+
+The user cannot be 'logged in' until potentially all three of these requirements have been satisified. This demands some potentially difficult server-side logic, as in order to satisfy these requirements, the following must be the case:
+
+-The user must enter their username and password before they are prompted for either a 2FA code or to enter their decryption key for their private key
+-The user must enter a 2FA key (if enabled) before they are prompted to enter their decryption key for their private key
+-When prompted for the decryption key for the private key, this decryption key must never be sent to the login server
+-At the final login step (i.e. we've authenticated the username, password, 2FA key and decryption of the private key), the login function must be called on the server side, which requires the user password
+-The user password must never be stored in plaintext on the server side (as we did for OBay)
+-Thus at the final step of the login, the following data must be submitted to the server:
+	-username
+	-password
+	-decrypted version of challenge phrase
+-The server at this point must also know that the user has entered their 2FA phrase correctly - this knowledge must be specific to the session rather than the user account
+
+
+Potential solution to this issue:
+1: User goes to the login webpage and enters their username and password
+2: User clicks the next button and an AJAX request is sent to the server containing the username and password, which are authenticated. The server either responds detailing that 2FA is needed, or responds with the user's public key, encrypted private key, and a challenge phrase
+3: If the server has sent a request indicating that 2FA is needed, the browser prompts the user for a 2FA passphrase which will have been sent to the user by phone. The user enters their 2FA key, and it is sent to the server along with their username via AJAX and authenticated. If authentication is successful, the server will set a server side cookie for the user's session indicating that the user has passed 2FA. The server will then reply to this request with the user's public key, encrypted private key, and a challenge phrase
+4: With the username, password, key pair, and challenge phrase now on the user's browser, the user is prompted to enter their decryption key for their private key. The browser then uses this decryption key to decrypt the challenge phrase. The browser then sends the following to the server: username, password, decrypted challenge phrase.
+5: If the server is able to authenticate the three pieces of data mentioned earlier, the user is logged in, assuming 2FA is not enabled. Otherwise, the server checks for the 2FA server side cookie indicating that the user did indeed pass the 2FA challenge, and then authenticates the three pices of data. If all this is successful, the user is logged in.q
+
+
+Note: we do not set a server-side cookie after the initial login event indicating that the username and password have been entered successfully as we need to be able to call authenticate again on the actual login event.
