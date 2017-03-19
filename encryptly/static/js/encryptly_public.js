@@ -62,28 +62,44 @@ $("#id_two_factor").change(function () {
 var currentState = 0;
 $("#login").click(function () {
     if (currentState == 0) {
-        var posting = $.post(Urls.user_login(), {
+        $.post(Urls.user_login(), {
             username: $("#id_username").val(),
             password: $("#id_password").val()
-        });
-        posting.done(function (data) {
-            if (data['success']) {
-                $("#initial_authenticate").fadeOut("slow", function () {
-                    if (data['2fa_required']) {
-                        $("#2fa_authenticate").fadeIn("slow");
-                    } else {
-                        $("#decryption_authenticate").fadeIn("slow");
-                    }
-                });
-            } else {
-                $(".contact-form :input").prop("disabled", "false");
-            }
+        }).done(function (data) {
+            handleLoginResponse(data);
         });
 
     }
 
 
 });
+
+
+function handleLoginResponse(data) {
+    var errorMessage = data['error_message'];
+    console.log(data);
+    if (errorMessage != "") {
+        var errorElement = $('.ajax_error');
+        errorElement.first().html(errorMessage);
+        if (!errorElement.is(":visible")) {
+            errorElement.fadeIn("slow");
+        }
+        return;
+    }
+
+
+    if (data['authenticated']) {
+        $("#initial_authenticate").fadeOut("slow", function () {
+            if (data['2fa_required']) {
+                $("#2fa_authenticate").fadeIn("slow");
+            } else {
+                $("#decryption_authenticate").fadeIn("slow");
+            }
+        });
+    } else {
+        $(".contact-form :input").prop("disabled", "false");
+    }
+}
 
 
 //Helper functions

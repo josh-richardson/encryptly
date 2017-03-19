@@ -18,26 +18,35 @@
                     {% include "encryptly_backend/sub_templates/form-messages.html" %}
                     <fieldset>
                         {% csrf_token %}
+                        <div class="ajax_error">
+                            <div class="alert" role="alert">
+                            </div>
+                        </div>
                         <div id="initial_authenticate">
-                            <p><input class="form-control" id="id_username" maxlength="15" name="username" placeholder="Username" type="text" data-parsley-type="alphanum"></p>
-                            <p><input class="form-control" id="id_password" maxlength="100" minlength="10" name="password" placeholder="Password" type="password"></p>
+                            <p>
+                                <input class="form-control" id="id_username" maxlength="15" name="username" placeholder="Username" type="text" data-parsley-type="alphanum">
+                            </p>
+                            <p>
+                                <input class="form-control" id="id_password" maxlength="100" minlength="10" name="password" placeholder="Password" type="password">
+                            </p>
                         </div>
 
                         <div id="2fa_authenticate" hidden>
-                            <p><input class="form-control" data-parsley-type="alphanum" id="id_2fa" maxlength="6" minlength="6" name="twofactor" placeholder="Two-factor key" type="text"></p>
+                            <p>
+                                <input class="form-control" data-parsley-type="alphanum" id="id_2fa" maxlength="6" minlength="6" name="twofactor" placeholder="Two-factor key" type="text">
+                            </p>
                         </div>
 
                         <div id="decryption_authenticate" hidden>
-                            <p><input class="form-control" id="id_decryption_key" maxlength="100" minlength="10" name="decryption_key" placeholder="Decryption key" type="password"></p>
+                            <p>
+                                <input class="form-control" id="id_decryption_key" maxlength="100" minlength="10" name="decryption_key" placeholder="Decryption key" type="password">
+                            </p>
                         </div>
                     </fieldset>
                     <button id="login" class="btn btn-outline-primary pull-right" type="button">Next</button>
                 </form>
-
-
             </div>
         </div>
-
     </div>
     <script src="{% static "js/cryptojs/core-min.js" %}"></script>
     <script src="{% static "js/cryptojs/enc-base64-min.js" %}"></script>

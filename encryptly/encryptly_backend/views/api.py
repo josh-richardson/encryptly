@@ -11,6 +11,7 @@ from encryptly_backend.models import UserProfile
 client = memcache.Client([('127.0.0.1', 11211)])
 
 
+# CSRF exempt is necessary here as
 @csrf_exempt
 def user_exists(request):
     return_dict = {'allowed': False, 'exists': False}
@@ -26,8 +27,11 @@ def user_exists(request):
     return JsonResponse(return_dict)
 
 
+# CSRF exempt should only be used for testing here
+# @csrf_exempt
 def user_login(request):
     return_dict = {'authenticated': False, 'two_factor': False, 'passed_two_factor': False, 'logged_in': False, 'private_key': None, 'public_key': None, 'challenge_phrase': None, 'error_message': None}
+    print(request.POST)
     if request.method == 'POST':
         if 'username' in request.POST and 'password' in request.POST:
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
