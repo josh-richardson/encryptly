@@ -33,3 +33,22 @@ Backend development:
 - [ ] Online statuses - When a user is online, a value representing their online status will be added to a memcached database. Low priority
 - [ ] Database models completed - Indicates that all database models have been completed - essentially the product works correctly and is ready to be shipped in terms of messaging infrastructure.
 - [ ] Chrome push notifications
+
+
+### Contributing & Relevant links/tutorials/etc:
+##### These are relevant videos to how some of the functionality in this app will work:
+Frontend development:
+- Beginner's jQuery tutorial (we do all DOM manipulation with jQuery if it's not handled by the template): https://www.youtube.com/watch?v=hMxGhHNOkCU
+- Communicating with the server via AJAX (login request and some form validation both use with AJAX): https://www.youtube.com/watch?v=fEYx8dQr_cQ
+
+Sending & receiving messages with websockets (relevant to frontend and backend):
+- Understanding websockets and how they differ from HTTP (we'll be sending and receiving messages this way): https://www.youtube.com/watch?v=Y0g3M4VG6Ns
+- Great tutorial on Django channels which will likely inspire our implementation, although our implementation is likely to be significantly more complex: https://www.sourcelair.com/blog/articles/115/django-channels-chat
+
+Encryption: 
+- Basic explanation of asymmetric encryption (great video that shows the concepts): https://www.youtube.com/watch?v=GSIDS_lvRv4
+- Explanation of key exchange using asymmetric encryption (we'll only be using asymmetric crypto for key exchange, not for sending messages): https://www.youtube.com/watch?v=ERp8420ucGs
+
+Relevant to two-factor implementation and rate limiting:
+- What is memcached and how does it work: https://www.youtube.com/watch?v=-h9q2FmX4eo
+- It should be noted that what we're using memcached for at the moment is pretty hacky and not really the usual use-case.
