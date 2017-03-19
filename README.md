@@ -11,12 +11,18 @@ An attempt to create an end-to-end encrypted messaging platform using Django and
 * Take a look a TODO.md if you want to see what still needs to be done.
 
 #### Optional stuff for development:
-* File watchers can be configured in PyCharm to execute SCSS when any of the relevant files are modified, django-js-reverse is used to pull relative URLs from urls.py in JavaScript - the relavant JS file for this can be generated each execution using `python manage.py collectstatic_js_reverse` (for which you can add an additional build task, and configure your runserver task to execute it pre-build)
+* File watchers can be configured in PyCharm to execute sass when any of the relevant files are modified, django-js-reverse is used to pull relative URLs from urlconfs in JavaScript - the relavant JS file for this can be generated each execution using `python manage.py collectstatic_js_reverse` (for which you can add an additional build task, and configure your runserver task to execute it pre-build)
 * If you want to compress the CSS so there aren't any duplicated media queries, install NodeJs and NPM, then cd to the encryptly directory, and execute: `npm install grunt --save-dev && npm install grunt-combine-mq --save-dev`. Media queries can then be compressed using `grunt combine_mq`. You can also configure a pre-build task to do this
 * Each webpage is configured to use livereloadx in development mode - so if you want to use that, install the livereloadx package, and run it on the Django project root directory, it should work automatically.
+* Grunt task configuration: https://vgy.me/qzJ8hT.png
+* JavaScript urlconf generation: https://vgy.me/3tko4v.png
+* File watcher configuration: https://vgy.me/9NU7PL.png
 
 ### Running with docker:
 * In order to test with docker, make sure docker is installed & that the daemon is running, and execute the following (note sudo isn't needed if you're added to the docker usergroup):
 `sudo docker run -p 8000:8000 --name encryptly-run -t synchisis/encryptly-docker:latest`
 * With this done, `docker start encryptly-run` and `docker stop encryptly-run` can be used respectively to start and stop the instance
 * This is not a deployment image and uses the default python webserver instead of a WSGI & nginx proxy. Testing only.
+
+
+

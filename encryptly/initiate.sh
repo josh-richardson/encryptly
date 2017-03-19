@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 service mysql start
 service memcached start
 echo "create database encryptly_backend" | mysql -u root -ptest123
