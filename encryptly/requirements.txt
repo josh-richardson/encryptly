@@ -4,3 +4,4 @@ grunt
 python-memcached
 channels
 django-js-reverse
+twilio
