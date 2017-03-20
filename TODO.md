@@ -25,14 +25,14 @@ Frontend JavaScript:
 
 Backend development:
 - [x] Database models started (MySQL as driver)
-- [ ] Login & 2FA capability (Twilio) - The server side component of letting users log in, has to verify that the user's username, password and decryption key without the decryption key being sent to the server. For details on how I approached and am implementing this, take a look at doc/implementation notes/login_spec.txt
+- [x] Login & 2FA capability (Twilio) - The server side component of letting users log in, has to verify that the user's username, password and decryption key without the decryption key being sent to the server. For details on how I approached and am implementing this, take a look at doc/implementation notes/login_spec.txt
 - [ ] Database models for messaging completed - The database models in which we store data about messages which have been sent between users or in a group. These models will be difficult to implement and will require significant thought
 - [ ] Friend request capability - Backend functionality for a user to be able to send a friend request to another user - this involves handling the request from user a, and sending the correct data to user b, as well as storing the request in the DB until it is replied to
 - [ ] One-to-one messaging - Backend functionality for a user to be able to send a message to another user - this involves handling the message from user a, and sending the correct data to user b, as well as storing the message in a DB until it is deleted
 - [ ] Image/other media handling - Backend functionality for a user to be able to send generic data to another user - unsure of the implementation as of yet, likely won't be simply storing the data in the DB as that will lead to provocative file sizes, only storage of media metadata in DB; media itself in the django uploads directory
 - [ ] Online statuses - When a user is online, a value representing their online status will be added to a memcached database. Low priority
 - [ ] Database models completed - Indicates that all database models have been completed - essentially the product works correctly and is ready to be shipped in terms of messaging infrastructure.
-- [ ] Chrome push notifications
+- [ ] Chrome push notifications - Push notifications to Chrome browsers on Android and Desktop could potentially be implemented for notifications when a user is contacted.
 
 
 ### Contributing & Relevant links/tutorials/etc:
@@ -48,7 +48,13 @@ Sending & receiving messages with websockets (relevant to frontend and backend):
 Encryption: 
 - Basic explanation of asymmetric encryption (great video that shows the concepts): https://www.youtube.com/watch?v=GSIDS_lvRv4
 - Explanation of key exchange using asymmetric encryption (we'll only be using asymmetric crypto for key exchange, not for sending messages): https://www.youtube.com/watch?v=ERp8420ucGs
+- JSEncrypt demo: http://travistidwell.com/jsencrypt/demo/index.html
 
 Relevant to two-factor implementation and rate limiting:
 - What is memcached and how does it work: https://www.youtube.com/watch?v=-h9q2FmX4eo
 - It should be noted that what we're using memcached for at the moment is pretty hacky and not really the usual use-case.
+
+Chrome app manifest and chrome push notifications:
+- Chrome manifest details: https://developers.google.com/web/updates/2014/11/Support-for-installable-web-apps-with-webapp-manifest-in-chrome-38-for-Android
+- Web push demo: https://goroost.com/try-web-push
+- Web push implementation: https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/
