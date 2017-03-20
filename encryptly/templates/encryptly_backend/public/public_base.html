@@ -5,23 +5,23 @@
 
 
 {% block footer %}
-
-<footer>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-footer col-md-4">
-                <span class="copyright">Copyright © Encryptly 2017</span>
-            </div>
-            <div class="col-footer col-md-4">
-                <a href="#">Privacy Policy</a>
-            </div>
-            <div class="col-footer col-md-4">
-                <a href="#">Terms of Use</a>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-footer col-md-4">
+                    <span class="copyright">Copyright © Encryptly 2017</span>
+                </div>
+                <div class="col-footer col-md-4">
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="col-footer col-md-4">
+                    <a href="#">Terms of Use</a>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
-<script src="{% static "js/parsley.min.js" %}"></script>
-<script src="{% static "js/encryptly_public.js" %}"></script>
+    </footer>
+    <script src="{% static "js/parsley.min.js" %}"></script>
+    <script src="{% static "js/encryptly_base.js" %}"></script>
+    {% block public_scripts %}
+    {% endblock %}
 {% endblock %}

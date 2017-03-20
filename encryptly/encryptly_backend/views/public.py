@@ -33,7 +33,7 @@ def register(request):
     if request.method == 'POST':
         profile_form = ProfileForm(data=request.POST)
         user_form = UserForm(data=request.POST)
-
+        print(request.POST)
         if profile_form.is_valid() and user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)

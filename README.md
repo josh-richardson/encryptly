@@ -5,7 +5,8 @@ An attempt to create an end-to-end encrypted messaging platform using Django and
 * Make sure these are installed: `sudo apt-get update && sudo apt-get install -y libxml2-dev libxslt1-dev zlib1g-dev python3-pip memcached mysql-server python-dev python3-dev`
 * Create a mysql database named 'encryptly_backend' if it doesn't already exist
 * Now, create a file named "credentials.txt" with the username and password used for MySQL running on the localhost. For instance, the contents of the said file might be as follows: `root:password123` - make sure it's in the encryptly directory, as Django will read it on startup in order to try to access the database
-* Just to make sure, type `git status` and make sure that the credentials.txt file hasn't been added to the locally changed files list; if it has then your MySQL details will be uploaded to GitHub. The .gitignore file should prohibit this
+* Create a file named "twilio.txt" with the Twilio client secret (shared on the Discord server)
+* Just to make sure, type `git status` and make sure that the credentials.txt and twilio.txt files haven't been added to the locally changed files list; if they have then your MySQL and Twilio details will be uploaded to GitHub. The .gitignore file should prohibit this
 * Make sure you're in a virtualenv and that you're at the 'encryptly' directory, and type: `pip install -r requirements.txt`
 * If you're editing the CSS, make sure you edit assets/encryptly.scss instead of the file in /static/css because your changes will be overwritten if you edit the latter. If you want changes to propogate to the website, run sass on the scss file: `sass --watch encryptly_backend/assets/encryptly.scss:static/css/encryptly.css`
 * Take a look a TODO.md if you want to see what still needs to be done.

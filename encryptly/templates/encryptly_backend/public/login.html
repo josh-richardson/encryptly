@@ -15,11 +15,11 @@
             </div>
             <div class="card-block">
                 <form id="login_form" method="post" action="{% url 'login' %}" data-validate="parsley">
-                    {% include "encryptly_backend/sub_templates/form-messages.html" %}
+                    {% include "encryptly_backend/sub_templates/form_messages.html" %}
                     <fieldset>
                         {% csrf_token %}
-                        <div class="ajax_error">
-                            <div class="alert" role="alert">
+                        <div id="ajax_error">
+                            <div class="alert alert-danger" role="alert">
                             </div>
                         </div>
                         <div id="initial_authenticate">
@@ -31,13 +31,13 @@
                             </p>
                         </div>
 
-                        <div id="2fa_authenticate" hidden>
+                        <div id="two_fa_authenticate">
                             <p>
                                 <input class="form-control" data-parsley-type="alphanum" id="id_2fa" maxlength="6" minlength="6" name="twofactor" placeholder="Two-factor key" type="text">
                             </p>
                         </div>
 
-                        <div id="decryption_authenticate" hidden>
+                        <div id="decryption_authenticate">
                             <p>
                                 <input class="form-control" id="id_decryption_key" maxlength="100" minlength="10" name="decryption_key" placeholder="Decryption key" type="password">
                             </p>
@@ -48,10 +48,9 @@
             </div>
         </div>
     </div>
-    <script src="{% static "js/cryptojs/core-min.js" %}"></script>
-    <script src="{% static "js/cryptojs/enc-base64-min.js" %}"></script>
-    <script src="{% static "js/cryptojs/enc-utf16-min.js" %}"></script>
-    <script src="{% static "js/cryptojs/aes.js" %}"></script>
-    <script src="{% static "js/cryptojs/jsencrypt.js" %}"></script>
+{% endblock %}
 
+{% block public_scripts %}
+    {% include "encryptly_backend/sub_templates/crypto_scripts.html" %}
+    <script src="{% static "js/encryptly_login.js" %}"></script>
 {% endblock %}

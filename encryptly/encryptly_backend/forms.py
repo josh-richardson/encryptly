@@ -30,8 +30,8 @@ class UserForm(forms.ModelForm):
 
 
 class ProfileForm(forms.ModelForm):
-    public_key = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "textbox-hidden", 'data-parsley-required': "false"}))
-    private_key = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "textbox-hidden", 'data-parsley-required': "false"}))
+    public_key = forms.CharField(label="", widget=forms.Textarea(attrs={'class': "textbox-hidden", 'data-parsley-required': "false"}))
+    private_key = forms.CharField(label="", widget=forms.Textarea(attrs={'class': "textbox-hidden", 'data-parsley-required': "false"}))
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     two_factor = forms.BooleanField(label="Enable two-factor authentication", widget=CheckboxInput(), required=False)
     mobile_number = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Mobile number"}), validators=[phone_regex], max_length=15, required=False)

@@ -14,7 +14,7 @@
 
 
                 <form id="contact_form" method="POST" action="{% url 'contact' %}">
-                    {% include "encryptly_backend/sub_templates/form-messages.html" %}
+                    {% include "encryptly_backend/sub_templates/form_messages.html" %}
                     {% csrf_token %}
                     {{ contact_form.as_p }}
                     <button class="btn btn-outline-primary" type="submit">Send</button>

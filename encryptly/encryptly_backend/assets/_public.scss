@@ -255,6 +255,14 @@ textarea.parsley-error {
   opacity: 1;
 }
 
-.ajax_error {
+#ajax_error {
+  display: none;
+}
+
+#two_fa_authenticate {
+  display: none;
+}
+
+#decryption_authenticate {
   display: none;
 }

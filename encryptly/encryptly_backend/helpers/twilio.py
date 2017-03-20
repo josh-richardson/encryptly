@@ -3,8 +3,9 @@ import string
 
 from twilio.rest import TwilioRestClient
 
+# Again using filesystem for secrets is disgusting, but we'll live.
 account_sid = "AC8e46e54e7c3b1eab7b0be72880db09d1"
-auth_token = "bce322ca58f096efb04032c5abd14a31"
+auth_token = open("twilio.txt", "r").read().strip()
 client = TwilioRestClient(account_sid, auth_token)
 
 

@@ -15,7 +15,7 @@
             </div>
             <div class="card-block">
                 <form id="register_form" method="post" action="{% url 'register' %}" data-validate="parsley">
-                    {% include "encryptly_backend/sub_templates/form-messages.html" %}
+                    {% include "encryptly_backend/sub_templates/form_messages.html" %}
                     <fieldset>
                         {% csrf_token %}
                         {{ user_form.as_p }}
@@ -25,8 +25,6 @@
                         <p>
                             <input type="password" id="decryption-key-confirm" data-parsley-equalto="#decryption-key" size="50" class="form-control" title="Confirm Decryption key" name="decryption-key-confirm" placeholder="Confirm Decryption key" required/>
                         </p>
-
-
 
                         {% for field in profile_form.visible_fields %}
                             <p>
@@ -45,10 +43,9 @@
         </div>
 
     </div>
-    <script src="{% static "js/cryptojs/core-min.js" %}"></script>
-    <script src="{% static "js/cryptojs/enc-base64-min.js" %}"></script>
-    <script src="{% static "js/cryptojs/enc-utf16-min.js" %}"></script>
-    <script src="{% static "js/cryptojs/aes.js" %}"></script>
-    <script src="{% static "js/cryptojs/jsencrypt.js" %}"></script>
+{% endblock %}
 
+{% block public_scripts %}
+    {% include "encryptly_backend/sub_templates/crypto_scripts.html" %}
+    <script src="{% static "js/encryptly_register.js" %}"></script>
 {% endblock %}
