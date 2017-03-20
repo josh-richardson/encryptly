@@ -5,7 +5,7 @@ from django.forms import CheckboxInput
 from django.urls import reverse
 from django.urls import reverse_lazy
 
-from encryptly_backend.models import UserProfile, ContactRequest
+from encryptly_backend.models import UserProfile, ContactUsForm
 
 
 class UserForm(forms.ModelForm):
@@ -46,7 +46,7 @@ class ContactForm(forms.ModelForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': "form-control", 'placeholder': "(optional)"}), required=False)
 
     class Meta:
-        model = ContactRequest
+        model = ContactUsForm
         fields = ("message", "email")
 
     def clean(self):

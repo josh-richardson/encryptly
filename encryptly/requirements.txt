@@ -6,3 +6,4 @@ channels
 django-js-reverse
 twilio
 pycrypto
+django-unixdatetimefield
