@@ -4,6 +4,7 @@
 *.pyc
 *.sqlite3
 credentials.txt
+twilio.txt
 node_modules/
 .sass-cache/
 migrations/

@@ -15,8 +15,25 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-
 class ContactRequest(models.Model):
+    requestee = models.ForeignKey(UserProfile)
+    requested = models.ForeignKey(UserProfile)
+    accepted = models.BooleanField(default=False)
 
+class Contact(models.Model):
+    user = models.ForeignKey(UserProfile)
+    contact = models.ForeignKey(UserProfile)
+
+class Message(models.Model):
+    content_type = models.CharField()
+    content = ContextField()
+    time_sent = models.UnixDateTimeField()
+    sender = models.ForeignKey(UserProfile)
+    chat = models.ForeignKey(Chat)
+
+class Chat(models.Model):
+    participants = models.ManyToManyField(UserProfile)
+
+class ContactUsForm(models.Model):
     message = models.CharField(max_length=4096)
     email = models.EmailField(blank=True, null=True)
