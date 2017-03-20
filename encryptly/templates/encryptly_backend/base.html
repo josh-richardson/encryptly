@@ -5,7 +5,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8"/>
-    <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
     <title>
         Encryptly -
         {% block title_block %}
@@ -72,14 +72,26 @@
                 </div>
             </li>{% endcomment %}
             </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item {% active_handler "login" %}">
-                    <a class="nav-link" href="{% url "login" %}">Login</a>
-                </li>
-                <li class="nav-item {% active_handler "register" %}">
-                    <a class="nav-link" href="{% url "register" %}">Register</a>
-                </li>
-            </ul>
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <li class="nav-item {% active_handler "test_main" %}">
+                        <a class="nav-link" href="{% url "test_main" %}">My Messages</a>
+                    </li>
+                    <li class="nav-item {% active_handler "logout" %}">
+                        <a class="nav-link" href="{% url "logout" %}">Log out</a>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item {% active_handler "login" %}">
+                        <a class="nav-link" href="{% url "login" %}">Login</a>
+                    </li>
+                    <li class="nav-item {% active_handler "register" %}">
+                        <a class="nav-link" href="{% url "register" %}">Register</a>
+                    </li>
+                </ul>
+            {% endif %}
+
         </div>
     </nav>
 

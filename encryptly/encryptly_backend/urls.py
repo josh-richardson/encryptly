@@ -17,11 +17,7 @@ urlpatterns = [
 
     url(r'^main/$', views.private.test_main, name='test_main'),
     url(r'^themes/$', views.private.test_themes, name='test_themes'),
-
-
-
-
-    url(r'^logout/$', views.public.login, name='logout'),
+    url(r'^user/logout/$', views.private.user_logout, name='logout'),
 
     url(r'^user/exists/$', views.api.user_exists, name='user_exists'),
     url(r'^user/login/$', views.api. user_login, name='user_login'),
