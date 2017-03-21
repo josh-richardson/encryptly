@@ -1,0 +1,3 @@
+asgi-redis
+channels
+daphne
