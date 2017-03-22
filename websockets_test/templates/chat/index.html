@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div id="chat" style="width: 500px; height: 500px; overflow-y:scroll; background-color: aliceblue">
+
+</div>
+<br/>
+<input id="channel_id" style="width: 442px" title="Channel ID:" placeholder="Channel to join"/>
+<button type="button" id="join">Join</button>
+<br/>
+<input id="message" style="width: 442px" title="Your message:" placeholder="Your message"/>
+<button type="button" id="submit">Send</button>
+
+
+<script type="text/javascript">
+    var socket = null;
+    $("#join").click(function () {
+        var channelId = $('#channel_id').val();
+        socket = new WebSocket("ws://" + window.location.host + "/" + channelId);
+        socket.onmessage = function (e) {
+            alert("Fired");
+            $('#chat').append("<p>" + e.data + "</p>");
+        };
+        socket.onopen = function () {
+            alert("Now chatting in: " + channelId)
+        };
+        if (socket.readyState == WebSocket.OPEN) socket.onopen();
+    });
+
+    $('#submit').click(function () {
+
+        if (socket.readyState == WebSocket.OPEN) {
+            var messageElement = $('#message');
+            socket.send(messageElement.val());
+            messageElement.val("");
+        }
+    });
+
+
+</script>
+</body>
+</html>

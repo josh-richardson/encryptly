@@ -7,3 +7,4 @@ django-js-reverse
 twilio
 pycrypto
 django-unixdatetimefield
+asgi_redis
