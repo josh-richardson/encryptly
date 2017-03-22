@@ -5,7 +5,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8"/>
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
     <title>
         Encryptly -
         {% block title_block %}
@@ -46,7 +46,7 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Encryptly</a>
+        <a class="navbar-brand" href="#"><img src="{% static "img/logoHeader.png" %}"></a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item {% active_handler "index" %}">
