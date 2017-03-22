@@ -9,40 +9,55 @@
 
 </head>
 <body>
+<div id="conversations">
+
+</div>
 <div id="chat" style="width: 500px; height: 500px; overflow-y:scroll; background-color: aliceblue">
 
 </div>
-<br/>
-<input id="channel_id" style="width: 442px" title="Channel ID:" placeholder="Channel to join"/>
-<button type="button" id="join">Join</button>
 <br/>
 <input id="message" style="width: 442px" title="Your message:" placeholder="Your message"/>
 <button type="button" id="submit">Send</button>
 
 
+<br/>
+<br/>
+
+<div id="friends" style="width: 100px; height: 500px;">
+    <input id="friendName" style="width: 442px" title="Your message:" placeholder="Add friend"/>
+    <button type="button" id="addFriend">Add</button>
+
+
+</div>
+
 <script type="text/javascript">
     var socket = null;
-    $("#join").click(function () {
-        var channelId = $('#channel_id').val();
-        socket = new WebSocket("ws://" + window.location.host + "/" + channelId);
-        socket.onmessage = function (e) {
-            alert("Fired");
-            $('#chat').append("<p>" + e.data + "</p>");
-        };
-        socket.onopen = function () {
-            alert("Now chatting in: " + channelId)
-        };
-        if (socket.readyState == WebSocket.OPEN) socket.onopen();
-    });
+
+    socket = new WebSocket("ws://" + window.location.host + "/");
+    socket.onmessage = function (e) {
+        $('#chat').append("<p>" + e.data + "</p>");
+    };
+    socket.onopen = function () {
+        alert("Connected to socketserver");
+    };
+
+
+    function socketSend(data) {
+        if (socket.readyState == WebSocket.OPEN) {
+            socket.send(data);
+        }
+    }
 
     $('#submit').click(function () {
-
-        if (socket.readyState == WebSocket.OPEN) {
-            var messageElement = $('#message');
-            socket.send(messageElement.val());
-            messageElement.val("");
-        }
+        var messageElement = $('#message');
+        socketSend(messageElement.val());
+        messageElement.val("");
     });
+
+    $('#addFriend').click(function () {
+        socketSend(JSON.stringify({"intent": "friend_request", "username": $('#friendName').val()}));
+    });
+
 
 
 </script>

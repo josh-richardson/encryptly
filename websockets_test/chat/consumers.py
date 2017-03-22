@@ -1,35 +1,35 @@
+import json
+
 from channels import Group
-from django.http import HttpResponse
-from channels.handler import AsgiHandler
-from channels.sessions import channel_session
+from channels.auth import channel_session_user_from_http, channel_session_user
 
+from chat.intents.intent_add_friend import IntentAddFriend
 
-# @channel_session
-def http_consumer(message):
-    # Make standard HTTP response - access ASGI path attribute directly
-    response = HttpResponse("Hello world! You asked for %s" % message.content['path'])
-    # Encode that response into message format (ASGI)
-    for chunk in AsgiHandler.encode_response(response):
-        message.reply_channel.send(chunk)
+# receive message from user with chat id -> map chat ID to list of active user sessions -> emit to those sessions only
+from chat.intents.intent_get_friends import IntentGetFriends
 
-
-@channel_session
+intents = [IntentAddFriend(), IntentGetFriends()]
+@channel_session_user
 def ws_message(message):
-    print("received")
-    Group("chat-%s" % message.channel_session['room']).send({
-        "text": message.content['text']
-    })
+    if message.user.is_authenticated():
+        message_data = json.loads(message.content['text'])
+        for intent in intents:
+            if intent.validate(message_data["intent"]):
+                intent.execute(message, message_data)
+
+        # Group("chat-%s" % message.channel_session['room']).send({
+        #     "text": message.content['text']
+        # })
 
 
-@channel_session
+@channel_session_user_from_http
 def ws_connect(message):
-    message.reply_channel.send({"accept": True})
-    room = message.content['path'].strip("/")
-    message.channel_session['room'] = room
-    print("chat-%s" % room)
-    Group("chat-%s" % room).add(message.reply_channel)
+    if message.user.is_authenticated():
+        message.reply_channel.send({"accept": True})
+        Group("chat-%s" % message.user.username).add(message.reply_channel)
 
 
-@channel_session
+@channel_session_user
 def ws_disconnect(message):
-    Group("chat-%s" % message.channel_session['room']).discard(message.reply_channel)
+    if message.user.is_authenticated():
+        Group("chat-%s" % message.user.username).discard(message.reply_channel)
