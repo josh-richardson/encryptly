@@ -3,16 +3,13 @@
 /*overriding default theme*/
 html, body {
   background-color: #1e2124;
-  color: #405da6; }
+  color: #4e930e; }
+
+html, body a {
+  color: #4e930e; }
 
 .navbar {
   background-color: #2e3136; }
-
-.navbar li a:hover {
-  background: #405da6; }
-
-.active {
-  background: #405da6; }
 
 footer {
   background-color: #1e2124; }
@@ -22,7 +19,7 @@ footer {
   border-top: 1px solid #41403b; }
 
 .sidebar li a {
-  color: #405da6;
+  color: white;
   border-bottom: 1px solid #41403b; }
 
 .sidebar li a:focus {
@@ -31,19 +28,37 @@ footer {
 .navbar-light .navbar-nav .nav-link {
   color: white; }
 
-.navbar-light .navbar-brand {
-  color: white; }
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #3abe44; }
+
+.navbar-light .navbar-nav .active > .nav-link {
+  color: #4e930e; }
 
 .form-control {
-  color: #464a4c;
+  color: #008542;
+  background-color: #300a24; }
+
+.form-control:focus {
+  color: #008542;
   background-color: #300a24; }
 
 .fa {
-  color: #405da6; }
+  color: #7f7f7f; }
 
-.input-group-addon.primary {
-  color: white;
-  background-color: #3276b1;
-  border-color: #285e8e; }
+.btn {
+  border: 0;
+  color: #008542;
+  background-color: #2e3136; }
+
+.btn:hover {
+  color: #008542;
+  background-color: #555555; }
+
+.btn:active {
+  color: #008542;
+  background-color: #7f7f7f; }
+
+.btn > .fa {
+  color: #008542; }
 
 /*# sourceMappingURL=dark.css.map */
