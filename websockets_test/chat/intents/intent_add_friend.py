@@ -10,7 +10,7 @@ import json
 class IntentAddFriend(BaseIntent):
 
     def __init__(self):
-        BaseIntent.__init__(self, "friend_request")
+        BaseIntent.__init__(self, "add_friend")
 
     def execute(self, message, message_data):
         username = message_data['username']
