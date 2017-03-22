@@ -20,8 +20,8 @@ class IntentAddFriend(BaseIntent):
             user = User.objects.get(username=username)
             if user:
                 contact = Contact()
-                contact.owner_user = message.user
-                contact.contact = user
+                contact.from_user = message.user
+                contact.to_user = user
                 contact.save()
                 to_return['success'] = True
             else:

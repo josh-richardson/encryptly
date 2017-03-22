@@ -5,8 +5,12 @@ from django.contrib.auth.models import User
 
 
 class Contact(models.Model):
-    owner_user = models.ForeignKey(User, related_name='contacts')
-    contact = models.OneToOneField(User)
+    id = models.AutoField(primary_key=True)
+    from_user = models.ForeignKey(User, related_name='contacts')
+    to_user = models.ForeignKey(User, related_name='unused_contact')
+
+    class Meta:
+        unique_together = ('to_user', 'from_user')
 
 
 class Conversation(models.Model):

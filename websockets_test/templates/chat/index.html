@@ -9,10 +9,13 @@
 
 </head>
 <body>
-<div id="conversations">
+
+<h2>{{ user.username }}</h2>
+<div id="friends" style="height:500px; width: 200px; background-color:aliceblue; ">
 
 </div>
-<div id="chat" style="width: 500px; height: 500px; overflow-y:scroll; background-color: aliceblue">
+<div id="chat"
+     style="width: 500px; height: 500px; overflow-y:scroll; background-color: aliceblue; transform: translate(250px, -500px); margin: 0 100px 0 auto; display:block; float: left">
 
 </div>
 <br/>
@@ -22,43 +25,52 @@
 
 <br/>
 <br/>
+<input id="friendName" style="width: 442px" title="Your message:" placeholder="Add friend"/>
+<button type="button" id="addFriend">Add</button>
 
-<div id="friends" style="width: 100px; height: 500px;">
-    <input id="friendName" style="width: 442px" title="Your message:" placeholder="Add friend"/>
-    <button type="button" id="addFriend">Add</button>
-
-
-</div>
 
 <script type="text/javascript">
     var socket = null;
 
     socket = new WebSocket("ws://" + window.location.host + "/");
-    socket.onmessage = function (e) {
-        $('#chat').append("<p>" + e.data + "</p>");
-    };
+    var targetUser;
     socket.onopen = function () {
-        alert("Connected to socketserver");
+        socketSend({"intent": "get_friends"})
     };
-
 
     function socketSend(data) {
         if (socket.readyState == WebSocket.OPEN) {
-            socket.send(data);
+            socket.send(JSON.stringify(data));
         }
     }
 
     $('#submit').click(function () {
         var messageElement = $('#message');
-        socketSend(messageElement.val());
+        socketSend({"intent": "send_message", "content": messageElement.val(), "username": targetUser});
         messageElement.val("");
     });
 
     $('#addFriend').click(function () {
-        socketSend(JSON.stringify({"intent": "friend_request", "username": $('#friendName').val()}));
+        socketSend({"intent": "friend_request", "username": $('#friendName').val()});
     });
 
 
+    socket.onmessage = function (e) {
+        var data = JSON.parse(e.data);
+        if (data['error'] != null) {
+            alert("Request failed: " + data['error']);
+            return;
+        }
+        if (data['intent'] == "get_friends") {
+            data['friends'].forEach(function (element) {
+                $('#friends').append("<a class='messageClick' href='#'>" + element + "</a>");
+            });
+
+            $('.messageClick').click(function () {
+                alert("click event");
+            });
+        }
+    };
 
 </script>
 </body>

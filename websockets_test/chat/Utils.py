@@ -5,4 +5,4 @@ from chat.models import Contact
 
 
 def get_friends(user):
-    return [contact.contact.username for contact in user.contacts.all()]
+    return [contact.to_user.username for contact in user.contacts.all()]

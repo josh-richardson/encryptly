@@ -24,6 +24,10 @@ class IntentSendMessage(BaseIntent):
             result = reduce(lambda qs, pk: qs.filter(participants=pk), arr, Conversation.objects.annotate(count=Count('participants')).filter(count=len(arr)))
             if result.count() != 0:
                 conv = result.first()
+                new_message = Message()
+                new_message.content = message_data['content']
+                new_message.conversation = conv
+                new_message.save()
                 for p in conv.participants.all():
                     Group("chat-%s" % p.username).send({
                         "text": message.content['text']
