@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -8,9 +10,11 @@ class Contact(models.Model):
 
 
 class Conversation(models.Model):
-    contacts = models.OneToOneField(Contact)
+    id = models.AutoField(primary_key=True)
+    date_started = models.DateTimeField(blank=True, default=datetime.now())
+    participants = models.ManyToManyField(User, related_name='conversations')
 
 
 class Message(models.Model):
     content = models.CharField(max_length=4096)
-    conversation = models.ForeignKey(Conversation, related_name='messsages')
+    conversation = models.ForeignKey(Conversation, related_name='messages')

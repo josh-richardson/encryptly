@@ -11,7 +11,3 @@ class BaseIntent(metaclass=ABCMeta):
     @abstractmethod
     def execute(self, message, message_data):
         pass
-
-
-
-

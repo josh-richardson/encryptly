@@ -7,8 +7,9 @@ from chat.intents.intent_add_friend import IntentAddFriend
 
 # receive message from user with chat id -> map chat ID to list of active user sessions -> emit to those sessions only
 from chat.intents.intent_get_friends import IntentGetFriends
+from chat.intents.intent_send_message import IntentSendMessage
 
-intents = [IntentAddFriend(), IntentGetFriends()]
+intents = [IntentAddFriend(), IntentGetFriends(), IntentSendMessage()]
 @channel_session_user
 def ws_message(message):
     if message.user.is_authenticated():

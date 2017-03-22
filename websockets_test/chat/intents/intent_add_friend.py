@@ -15,7 +15,7 @@ class IntentAddFriend(BaseIntent):
     def execute(self, message, message_data):
         username = message_data['username']
         to_return = {'intent:': self.name, 'success': False, 'error': None}
-        if username not in get_friends(message.user) and username is not message.user.username:
+        if username not in get_friends(message.user) and username != message.user.username:
             print(get_friends(message.user))
             user = User.objects.get(username=username)
             if user:
