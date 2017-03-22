@@ -30,3 +30,4 @@ def user_profile(request):
 	context_dic["online"] = profile.online_status
 	context_dic["profile_pic"] = profile.profile_picture
 	return render(request, "encryptly_backend/private/profile.html", context_dic)
+

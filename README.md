@@ -2,7 +2,7 @@
 An attempt to create an end-to-end encrypted messaging platform using Django and Channels, as well as lots of other extraneous stuff.
 
 ### Configuration for development:
-* Make sure these are installed: `sudo apt-get update && sudo apt-get install -y libxml2-dev libxslt1-dev zlib1g-dev python3-pip memcached mysql-server python-dev python3-dev`
+* Make sure these are installed: `sudo apt-get update && sudo apt-get install -y libxml2-dev libxslt1-dev zlib1g-dev python3-pip memcached mysql-server python-dev python3-dev redis-server`
 * Create a mysql database named 'encryptly_backend' if it doesn't already exist
 * Now, create a file named "credentials.txt" with the username and password used for MySQL running on the localhost. For instance, the contents of the said file might be as follows: `root:password123` - make sure it's in the encryptly directory, as Django will read it on startup in order to try to access the database
 * Create a file named "twilio.txt" with the Twilio client secret (shared on the Discord server)

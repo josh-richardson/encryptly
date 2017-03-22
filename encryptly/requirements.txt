@@ -8,3 +8,5 @@ twilio
 pycrypto
 django-unixdatetimefield
 Pillow
+asgi_redis
+
