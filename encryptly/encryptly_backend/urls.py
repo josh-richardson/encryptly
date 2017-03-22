@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from django.http import HttpResponseRedirect
+from django.conf import settings
+from django.conf.urls.static import static
 
 from encryptly_backend import views
 
@@ -14,7 +16,7 @@ urlpatterns = [
     url(r'^login/$', views.public.login, name='login'),
     url(r'^register/$', views.public.register, name='register'),
 
-
+	url(r'^profile/$', views.private.user_profile, name='profile'),
     url(r'^main/$', views.private.test_main, name='test_main'),
     url(r'^themes/$', views.private.test_themes, name='test_themes'),
     url(r'^user/logout/$', views.private.user_logout, name='logout'),
@@ -23,4 +25,4 @@ urlpatterns = [
     url(r'^user/login/$', views.api. user_login, name='user_login'),
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

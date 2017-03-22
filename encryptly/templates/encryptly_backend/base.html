@@ -36,6 +36,7 @@
 <script src="{% static "js/tether.min.js" %}"></script>
 <script src="{% static "js/bootstrap.js" %}"></script>
 <script src="{% static 'js/reverse.js' %}"></script>
+
 <div class="wrapper">
 
 
@@ -74,6 +75,9 @@
             </ul>
             {% if user.is_authenticated %}
                 <ul class="navbar-nav">
+					<li class="nav-item {% active_handler "profile" %}">
+						<a class="nav-link" href="{% url "profile" %}">View Profile</a>
+					</li>
                     <li class="nav-item {% active_handler "test_main" %}">
                         <a class="nav-link" href="{% url "test_main" %}">My Messages</a>
                     </li>

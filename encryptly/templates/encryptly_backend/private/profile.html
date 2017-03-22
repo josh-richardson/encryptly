@@ -1,0 +1,22 @@
+{% extends 'encryptly_backend/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Profile
+{% endblock %}
+
+{% block body_block %}
+	<div class="wrapper">
+		<h2>Your Profile</h2>
+		<p class="profile-data">Username: {{ username }}</p>
+		<p class="profile-data">2FA activated: {{ 2fa }}</p>
+		<p class="profile-data">Mobile number: {{ mobile }}</p>
+		<p class="profile-data">Online status: {{ online }}</p>
+		{% if profile_pic %}
+			<img src="{{ profile_pic.url }}" alt="Profile picture">
+		{% else %}
+			<p>No profile image uploaded.</p> 
+		{% endif %}
+	</div>
+	
+{% endblock %}

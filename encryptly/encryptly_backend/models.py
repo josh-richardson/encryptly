@@ -12,6 +12,7 @@ class UserProfile(models.Model):
     two_factor = models.BooleanField(default=False)
     theme = models.IntegerField(default=0)
     online_status = models.BooleanField(default=False)
+    profile_picture = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
         return self.user.username
