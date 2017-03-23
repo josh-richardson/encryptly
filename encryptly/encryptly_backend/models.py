@@ -12,10 +12,12 @@ class UserProfile(models.Model):
     two_factor = models.BooleanField(default=False)
     theme = models.IntegerField(default=0)
     online_status = models.BooleanField(default=False)
-    profile_picture = models.ImageField(upload_to='profile_image', blank=True)
+#    profile_picture = models.FileField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
+
+User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
 class ContactRequest(models.Model):
     requestee = models.ForeignKey(UserProfile, related_name='requestee')

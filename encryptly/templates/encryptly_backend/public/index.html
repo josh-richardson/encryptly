@@ -7,13 +7,14 @@
 
 
 {% block body_block %}
+	{% if user.is_authenticated %}
+	{% else %}
     <div class="container exhibit">
-
         <div class="row exhibit">
-            <div class="col-xl-6">
+            <div class="col-xl-6">		
                 <div class="login">
                     <p class="encryptly-header">Encryptly</p>
-                    <p class="encryptly-sub">Secure messaging for the masses</p>
+                    <p class="encryptly-sub">Secure messaging for the masses</p> 
                     <form id="login_form" method="post" action="{% url 'user_login' %}">
                         {% csrf_token %}
                         <input type="text" name="username" value="" size="50" class="default-form form-control" title="Username" placeholder="Username"/>
@@ -21,7 +22,7 @@
                         <input type="password" name="decrpytionkey" value="" size="50" class="default-form form-control" title="Decryption key" placeholder="Decryption key"/>
                         <button class="btn btn-outline-primary default-form" type="submit">Login</button>
                     </form>
-                </div>
+                </div> 
             </div>
             <div class="col-xl-6 desktop-only">
                 <img class="image-impress" src="{% static "img/frontpage.png" %}"/>
@@ -29,6 +30,7 @@
         </div>
     </div>
     <hr/>
+    {% endif %}
 
     <div class="container exhibit">
         <div class="row exhibit">

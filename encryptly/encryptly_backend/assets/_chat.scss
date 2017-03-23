@@ -1,14 +1,24 @@
 //CSS specific to the chat page is here
 
 .profile-data {
-	background-color: #77d1e2;
+	background-color: #ddd5d0;
 	margin-left: 7%;
 	padding-left: 5px;
 	padding-right: 2%;
+	padding-top: 5px;
 	border-radius: 20px;
 	margin-right: 100px;
+	width: 400px;
+	height: 45px;
 }
 
+.image-browser {
+	margin-left: 7%;
+}
+
+.edit-btn {
+	text-align: right;
+}
 #sidebar-wrapper {
     position: fixed;
     width: 10%;
