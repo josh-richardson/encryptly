@@ -9,7 +9,7 @@ Web pages:
 - [x] Sign up - lets the user sign up to the website. During this process the user must choose a username and password, and a decryption key, they also may potentially enable 2FA and enter a mobile number. A key-pair must also be generated for the user
 - [ ] Messaging interface - This should be implemented to a very basic level before the messaging capability is implemented on the backend, then the basics of the messaging capability should be implemented on the backend, and then the two should be developed iteratively in tandem with each other. The messaging interface should let users type messages, send files, and interact with friends
 - [ ] Themes - Low priority, probably just a user profile based variable which dictates which custom CSS we load into the messaging interface
-- [ ] Logo & Favicon - Low priority, just adds eye-candy, doesn't affect functionality
+- [x] Logo & Favicon - Low priority, just adds eye-candy, doesn't affect functionality
 - [ ] Chrome manifest for app - Low priority, adds better support for mobile apps.
 
 Frontend JavaScript:
