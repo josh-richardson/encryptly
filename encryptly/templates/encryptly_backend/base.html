@@ -25,6 +25,14 @@
 
 
     <link href="{% static "css/encryptly.css" %}" rel="stylesheet">
+{#    {{ request.session.theme }}#}
+    {% if request.session.theme %}
+        {% static "" as baseUrl %}
+
+        <link href="{{ baseUrl }}/css/encryptly_theme_{{ request.session.theme }}.css" rel="stylesheet" class="theme_remove">
+    {% endif %}
+    
+
 
     {% if DEBUG %}
         <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=2"></' + 'script>')</script>

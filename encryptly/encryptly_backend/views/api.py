@@ -70,6 +70,8 @@ def user_login(request):
                     if user.is_active:
                         login(request, user)
                         return_dict['logged_in'] = True
+                        user = UserProfile.objects.get(user=request.user)
+                        request.session["theme"] = user.theme
                     else:
                         return_dict['error_message'] = "Your user account seems to have been deactivated. Please use the contact form for support."
                 else:
