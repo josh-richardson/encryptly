@@ -7,12 +7,12 @@
 {% endblock %}
 
 {% block body_block %}
-
-	<h1>Confirm Delete</h1>
-	<form method='POST' action=".">{% csrf_token %}
-		<p>Are you sure you want to delete your profile: {{ prof.user }}?</p>
-		<input type='submit' value='Confirm'>
-		<a href="{% url 'profile' %}">Cancel</a>
-	</form>	
-	
+	<div class='container exhibit'>
+		<h1>Confirm Delete</h1>
+		<form method='POST' action=".">{% csrf_token %}
+			<p>Are you sure you want to delete your profile: {{ prof.user }}?</p>
+			<input class="btn btn-default" type='submit' value='Confirm'>
+			<a class="btn btn-default" href="{% url 'profile' %}">Cancel</a>
+		</form>	
+	</div>
 {% endblock %}

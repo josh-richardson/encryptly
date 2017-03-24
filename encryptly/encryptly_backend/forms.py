@@ -48,7 +48,7 @@ class ProfileForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('theme', 'two_factor', 'mobile_number')
+        fields = ('two_factor', 'mobile_number')
 
 
 # Allows the user to send contact requests

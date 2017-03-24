@@ -37,18 +37,18 @@ def user_profile(request):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        edit_profile_form = ProfileEditForm(request.POST, request.FILES, instance=request.user.profile)
+        edit_profile_form = ProfileEditForm(request.POST, instance=request.user.profile)
         if edit_profile_form.is_valid():
             edit_profile_form.save()
             return HttpResponseRedirect("/profile/")
     else:
         user = request.user
         profile = user.profile
-        form = ProfileEditForm(instance=profile)
+        form = ProfileEditForm(instance=request.user.profile)
 
     args = {}
     args.update(csrf(request))
-    args['user'] = user
+    args['user'] = request.user
     args['form'] = form
     return render(request, 'encryptly_backend/private/edit_profile.html', args)
 
