@@ -8,7 +8,7 @@ from encryptly_backend.models import UserProfile
 from encryptly_backend.forms import ProfileEditForm
 from django.template.context_processors import csrf
 from django.shortcuts import redirect
-
+from django.contrib.auth.models import User
 
 @login_required
 def test_main(request):
@@ -44,10 +44,12 @@ def edit_profile(request):
 	
 @login_required
 def delete_profile(request):
+	usr = User.objects.get(username = request.user)
 	profile = UserProfile.objects.get(user=request.user)
 
 	if request.method == 'POST':
-		profile.delete()
+		logout(request)
+		usr.delete()
 		messages.success(request, "Deleted profile successfully.")
 		return redirect('index')
 		
