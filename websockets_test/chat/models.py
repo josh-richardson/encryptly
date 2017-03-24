@@ -20,5 +20,7 @@ class Conversation(models.Model):
 
 
 class Message(models.Model):
+    from_user = models.ForeignKey(User, related_name='sent_messages')
+    date_sent = models.DateTimeField(blank=True, default=datetime.now())
     content = models.CharField(max_length=4096)
     conversation = models.ForeignKey(Conversation, related_name='messages')

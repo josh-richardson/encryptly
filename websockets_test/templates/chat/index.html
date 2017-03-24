@@ -11,7 +11,7 @@
 <body>
 
 <h2>{{ user.username }}</h2>
-<div id="friends" style="height:500px; width: 200px; background-color:aliceblue; ">
+<div id="friends" style="height:500px; width: 230px; background-color:aliceblue; ">
 
 </div>
 <div id="chat"
@@ -31,11 +31,13 @@
 
 <script type="text/javascript">
     var socket = null;
+    var conversations = {};
+    var targetUsers = [];
 
     socket = new WebSocket("ws://" + window.location.host + "/");
-    var targetUser;
+
     socket.onopen = function () {
-        socketSend({"intent": "get_friends"})
+        socketSend({"intent": "get_conversations"})
     };
 
     function socketSend(data) {
@@ -51,7 +53,7 @@
     });
 
     $('#addFriend').click(function () {
-        socketSend({"intent": "friend_request", "username": $('#friendName').val()});
+        socketSend({"intent": "add_friend", "username": $('#friendName').val()});
     });
 
 
@@ -61,16 +63,47 @@
             alert("Request failed: " + data['error']);
             return;
         }
-        if (data['intent'] == "get_friends") {
-            data['friends'].forEach(function (element) {
-                $('#friends').append("<a class='messageClick' href='#'>" + element + "</a>");
+        console.log(data);
+        if (data['intent'] == "get_conversations") {
+            conversations = {};
+            data['conversations'].forEach(function (element) {
+                element.users = element.users.filter(function(item) {return item !== "{{ user.username }}"});
+                $('#friends').append("<a class='conversation' data-conversation='" + element.id + "' href='#' data-users='"+ element.users.join(",") +"'>Chat with: " + element.users.join(", ") + "</a><br />");
             });
 
-            $('.messageClick').click(function () {
-                alert("click event");
+            data['remaining_friends'].forEach(function (element) {
+                $('#friends').append("<a class='friend' href='#' data-users='" + element + "'>Friend: " + element + "</a><br />");
             });
+
+            setConversationEvents();
+        } else if (data['intent'] == "get_messages") {
+            console.log(data);
+
+        } else if (data['intent'] == "add_friend" && data['success'] == true) {
+            socketSend({"intent": "get_conversations"})
         }
     };
+
+
+    function setConversationEvents() {
+
+            $('.conversation').click(function () {
+                var conversation_id =$(this).data("conversation");
+                if (conversation_id in conversations) {
+
+
+                } else {
+                    console.log("fired:");
+                    socketSend({"intent": "get_messages", "conversation": conversation_id})
+                }
+
+            });
+
+            $('.friend').click(function () {
+                $("#chat").html("");
+                targetUsers = $(this).data("users").split(", ");
+            });
+    }
 
 </script>
 </body>
