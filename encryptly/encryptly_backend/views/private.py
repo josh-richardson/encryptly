@@ -14,13 +14,6 @@ from django.contrib.auth.models import User
 def test_main(request):
     return render(request, "encryptly_backend/private/main.html", {})
 
-
-@login_required
-def themes(request):
-    print(request.session['theme'])
-    return render(request, "encryptly_backend/private/themes.html", {})
-
-
 @login_required
 def set_theme(request, int):
     user = UserProfile.objects.get(user=request.user)
@@ -28,7 +21,6 @@ def set_theme(request, int):
     user.save()
     request.session['theme'] = int
     return render(request, "encryptly_backend/private/themes.html", {})
-
 
 @login_required
 def user_logout(request):
@@ -69,16 +61,15 @@ def edit_profile(request):
 
 @login_required
 def delete_profile(request):
-	usr = User.objects.get(username = request.user)
-	profile = UserProfile.objects.get(user=request.user)
+    usr = User.objects.get(username=request.user)
+    profile = UserProfile.objects.get(user=request.user)
 
-	if request.method == 'POST':
-		logout(request)
-		usr.delete()
-		messages.success(request, "Deleted profile successfully.")
-		return redirect('index')
-		
-	context = {}
-	context['prof'] = profile	
+    if request.method == 'POST':
+        logout(request)
+        usr.delete()
+        messages.success(request, "Deleted profile successfully.")
+        return redirect('index')
 
+    context = {}
+    context['prof'] = profile
     return render(request, 'encryptly_backend/private/delete_profile.html', context)
