@@ -1,0 +1,18 @@
+{% extends 'encryptly_backend/public/public_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Profile
+{% endblock %}
+
+{% block body_block %}
+
+	<h1>Profile</h1>
+		<form method='POST' action="{% url 'profile' %}">{% csrf_token %}
+		<p class="profile-data">Username: {{ user }}</p>
+		<p class="profile-data">Two-factor authentication: {{ form.two_factor }} </p>
+		<p class="profile-data">Mobile number: {{ form.mobile_number }} </p>
+		<p class="profile-data"><a href="{% url 'themes' %}">Change Theme</a></p>
+		<input class="image-browser" type='submit' value='Save changes'/> or <a href="{% url 'delete_profile' %}">Delete</a>
+	</form>
+{% endblock %}

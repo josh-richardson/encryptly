@@ -5,6 +5,7 @@ from django.forms import CheckboxInput
 from django.urls import reverse
 from django.urls import reverse_lazy
 
+
 from encryptly_backend.models import UserProfile, ContactUsForm
 
 
@@ -39,6 +40,13 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('public_key', 'private_key', 'two_factor', 'mobile_number')
+        
+class ProfileEditForm(forms.ModelForm):
+	class Meta:
+		model = UserProfile
+		fields = ('theme', 'two_factor', 'mobile_number')
+		
+	
 
 
 class ContactForm(forms.ModelForm):

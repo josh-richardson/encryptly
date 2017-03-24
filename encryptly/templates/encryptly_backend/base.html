@@ -25,6 +25,13 @@
 
 
     <link href="{% static "css/encryptly.css" %}" rel="stylesheet">
+{#    {{ request.session.theme }}#}
+    {% if request.session.theme %}
+        {% static "" as baseUrl %}
+        <link href="{{ baseUrl }}/css/theme{{ request.session.theme }}.css" rel="stylesheet" class="theme_remove">
+    {% endif %}
+    
+
 
     {% if DEBUG %}
         <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=2"></' + 'script>')</script>
@@ -46,7 +53,7 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#"><img src="{% static "img/logoHeader.png" %}"></a>
+        <a class="navbar-brand" href="{% url "index" %}"><img src="{% static "img/logoHeader.png" %}"></a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item {% active_handler "index" %}">
@@ -75,12 +82,12 @@
             </ul>
             {% if user.is_authenticated %}
                 <ul class="navbar-nav">
-					<li class="nav-item {% active_handler "profile" %}">
-						<a class="nav-link" href="{% url "profile" %}">View Profile</a>
-					</li>
                     <li class="nav-item {% active_handler "test_main" %}">
                         <a class="nav-link" href="{% url "test_main" %}">My Messages</a>
                     </li>
+                    <li class="nav-item {% active_handler "profile" %}">
+						<a class="nav-link" href="{% url "profile" %}">View Profile</a>
+					</li>
                     <li class="nav-item {% active_handler "logout" %}">
                         <a class="nav-link" href="{% url "logout" %}">Log out</a>
                     </li>
