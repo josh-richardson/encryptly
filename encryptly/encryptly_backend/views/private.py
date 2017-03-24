@@ -20,7 +20,7 @@ def set_theme(request, int):
     user.theme = int
     user.save()
     request.session['theme'] = int
-    return render(request, "encryptly_backend/private/themes.html", {})
+    return render(request, "encryptly_backend/private/edit_profile.html", {})
 
 @login_required
 def user_logout(request):
