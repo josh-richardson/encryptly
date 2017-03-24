@@ -41,6 +41,8 @@ def edit_profile(request):
         if edit_profile_form.is_valid():
             edit_profile_form.save()
             return HttpResponseRedirect("/profile/")
+        else:
+            print(edit_profile_form.errors)
     else:
         user = request.user
         profile = user.profile
