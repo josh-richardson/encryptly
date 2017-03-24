@@ -2,7 +2,6 @@ import json
 
 from channels import Group
 
-from chat.Utils import get_friends
 from chat.intents.base_intent import BaseIntent
 from chat.models import Conversation
 

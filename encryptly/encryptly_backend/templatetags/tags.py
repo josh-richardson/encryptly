@@ -6,13 +6,14 @@ from django.utils.safestring import mark_safe
 register = template.Library()
 
 
+# Allows the main webpage to know which webpage to embolden on the title bar
 @register.simple_tag(takes_context=True)
 def active_handler(context, page, **kwargs):
     if reverse(page) in context.request.path:
         return mark_safe("active")
 
-
-# @register.filter
+# Useful helpers we didn't end up using
+#  @register.filter
 # def countdown(date):
 #     timeremaining = date.replace(tzinfo=None) - datetime.now()
 #

@@ -11,6 +11,7 @@
 <body>
 
 <h2>{{ user.username }}</h2>
+<h4 id='ccw'>Currently chatting with: Nobody</h4>
 <div id="friends" style="height:500px; width: 230px; background-color:aliceblue; ">
 
 </div>
@@ -33,6 +34,7 @@
     var socket = null;
     var conversations = {};
     var targetUsers = [];
+    var targetConversation = null;
 
     socket = new WebSocket("ws://" + window.location.host + "/");
 
@@ -48,7 +50,10 @@
 
     $('#submit').click(function () {
         var messageElement = $('#message');
-        socketSend({"intent": "send_message", "content": messageElement.val(), "username": targetUser});
+        if (targetConversation != null) {
+            socketSend({"intent": "send_message", "content": messageElement.val(), "username": targetUser});
+        }
+
         messageElement.val("");
     });
 
@@ -93,7 +98,6 @@
 
 
                 } else {
-                    console.log("fired:");
                     socketSend({"intent": "get_messages", "conversation": conversation_id})
                 }
 
@@ -102,6 +106,7 @@
             $('.friend').click(function () {
                 $("#chat").html("");
                 targetUsers = $(this).data("users").split(", ");
+                $("#ccw").text("Currently chatting with: " + targetUsers.join(", "));
             });
     }
 

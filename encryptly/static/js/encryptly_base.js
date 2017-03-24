@@ -9,7 +9,7 @@ $.ajaxSetup({
 });
 
 
-//Helper functions
+//Helper function to pull CSRF cookie
 function getCookie(e) {
     var o = null;
     if (document.cookie && "" != document.cookie)

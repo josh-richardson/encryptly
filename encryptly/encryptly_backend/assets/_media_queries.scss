@@ -1,4 +1,5 @@
 //SCSS media query mixins
+
 @mixin mobile-only {
   @media (max-width: $mq-mobile-landscape) {
     @content;

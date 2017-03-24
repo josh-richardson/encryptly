@@ -9,4 +9,4 @@ pycrypto
 django-unixdatetimefield
 Pillow
 asgi_redis
-
+django-fullurl

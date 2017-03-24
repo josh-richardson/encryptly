@@ -22,6 +22,7 @@ def faq(request):
 
 
 def contact(request):
+    # If we get a post request and valid contact form data is sent, save it to the model, otherwise send a blank contact form
     if request.method == "POST":
         contact_form = ContactForm(data=request.POST)
         if contact_form.is_valid():
@@ -35,10 +36,11 @@ def contact(request):
 
 
 def register(request):
+    # If we get a post request and valid user data and profile data are sent, then we create a new user and notify the user, otherwise we render a blank sign-up form
     if request.method == 'POST':
         profile_form = ProfileForm(data=request.POST)
         user_form = UserForm(data=request.POST)
-        print(request.POST)
+
         if profile_form.is_valid() and user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)

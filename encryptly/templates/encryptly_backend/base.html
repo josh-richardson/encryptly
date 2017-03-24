@@ -1,52 +1,73 @@
 {% load static %}
 {% load tags %}
+{% load fullurl %}
 <!DOCTYPE html>
 
 <html>
 <head lang="en">
     <meta charset="UTF-8"/>
+
+
+    {# Favicon #}
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+
+    {#Title block#}
     <title>
         Encryptly -
         {% block title_block %}
         {% endblock %}
     </title>
 
+    {# Default meta tags for indexing#}
+    <meta name="description" content="Secure messaging for the masses">
+    <meta name="keywords" content="instant,messaging,secure,encryption,rsa,aes,privacy,security">
+    <meta name="author" content="The Encryptly Team">
 
+    {# OpenGraph meta tags for sharing #}
+    <meta property="og:title" content="Encryptly"/>
+    <meta property="og:image" content="{% fullstatic 'img/icon-large.png' %}"/>
+    <meta property="og:description" content="Secure messaging for the masses!"/>
+    <meta property="og:image:width" content="512"/>
+    <meta property="og:image:height" content="512"/>
+
+    {# Data for mobile devices #}
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="{% static "js/manifest.json" %}">
 
-    <!-- Bootstrap Core CSS -->
+
+    {# Core Bootstrap CSS #}
     <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
 
-    <!-- Custom Fonts -->
+    {# Custom fonts #}
     <link href="{% static "font-awesome/css/font-awesome.css" %}" rel="stylesheet" type="text/css">
 
 
+    {# Embed default CSS and any additional theme #}
     <link href="{% static "css/encryptly.css" %}" rel="stylesheet">
-{#    {{ request.session.theme }}#}
     {% if request.session.theme %}
         {% static "" as baseUrl %}
         <link href="{{ baseUrl }}/css/theme{{ request.session.theme }}.css" rel="stylesheet" class="theme_remove">
     {% endif %}
-    
 
 
+    {# If we're in debug mode, enable auto-reload #}
     {% if DEBUG %}
         <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=2"></' + 'script>')</script>
     {% endif %}
 </head>
 
 <body>
+{# Import all the JS libraries we need for display here as we don't know where in the page they'll be accessed #}
 <script src="{% static "js/jquery-3.1.1.js" %}"></script>
 <script src="{% static "js/tether.min.js" %}"></script>
 <script src="{% static "js/bootstrap.js" %}"></script>
 <script src="{% static 'js/reverse.js' %}"></script>
 
+{# Wrapper ensures height is 100% at all times #}
 <div class="wrapper">
 
-
+    {# Navbar code #}
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -86,8 +107,8 @@
                         <a class="nav-link" href="{% url "test_main" %}">My Messages</a>
                     </li>
                     <li class="nav-item {% active_handler "profile" %}">
-						<a class="nav-link" href="{% url "profile" %}">View Profile</a>
-					</li>
+                        <a class="nav-link" href="{% url "profile" %}">View Profile</a>
+                    </li>
                     <li class="nav-item {% active_handler "logout" %}">
                         <a class="nav-link" href="{% url "logout" %}">Log out</a>
                     </li>
@@ -106,6 +127,7 @@
         </div>
     </nav>
 
+    {# Block for webpages to inherit from #}
     {% block body_block %}
 
 
@@ -114,6 +136,7 @@
     <div class="push"></div>
 </div>
 
+{# Footer block #}
 {% block footer %}
 {% endblock %}
 

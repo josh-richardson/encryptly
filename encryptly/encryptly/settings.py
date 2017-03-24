@@ -13,17 +13,17 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 import pymysql
 
+# Trick python into thinking we're using the default MySQL driver
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Declare important dirs
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 MEDIA_DIR = os.path.join(BASE_DIR, "media")
 JS_REVERSE_OUTPUT_PATH = STATIC_DIR + "/js"
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-qt@%x232su4g%6wl8(4&fx6i9-1ycbkp)3mw1nn=ws+rx*u=d'
@@ -31,7 +31,8 @@ SECRET_KEY = '-qt@%x232su4g%6wl8(4&fx6i9-1ycbkp)3mw1nn=ws+rx*u=d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.ngrok.io']
+# Allow all our hosts
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.ngrok.io', '138.68.176.78']
 
 # Application definition
 
@@ -46,8 +47,8 @@ INSTALLED_APPS = [
     'grunt',
     'channels',
     'django_js_reverse',
+    'fullurl'
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,9 +59,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-
-
 
 ROOT_URLCONF = 'encryptly.urls'
 
@@ -81,14 +79,13 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'encryptly.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 
-# I'd user environment variables here, but getting them through to pycharm is a disgusting process, so falling back to file system.
+# I'd user environment variables here, but getting them through to pycharm is a disgusting process, so falling back to file system - sets up database credentials
 with open('credentials.txt', 'r') as credentials_file:
     data = credentials_file.read()
     DATABASES = {
@@ -143,8 +140,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
-
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
-

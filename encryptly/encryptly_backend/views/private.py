@@ -10,17 +10,11 @@ from django.template.context_processors import csrf
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 
+
 @login_required
 def test_main(request):
     return render(request, "encryptly_backend/private/main.html", {})
 
-@login_required
-def set_theme(request, int):
-    user = UserProfile.objects.get(user=request.user)
-    user.theme = int
-    user.save()
-    request.session['theme'] = int
-    return render(request, "encryptly_backend/private/edit_profile.html", {})
 
 @login_required
 def user_logout(request):

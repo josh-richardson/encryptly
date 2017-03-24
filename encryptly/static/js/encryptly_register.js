@@ -19,12 +19,16 @@ $("#id_private_key").removeAttr("required");
 //Registration form logic
 $("#register-next").click(function () {
     var form = $("#register_form");
-    // form.parsley().validate();
+    //If the form validated (i.e. all inputs are valid)
     form.parsley().whenValidate().done(function () {
+        //Hide the form
         form.fadeOut("slow", function () {
+            //Show the key generation progress indicator
             $(".key-generation").fadeIn("slow");
+            //Generate a 4096-bit RSA keypair
             var crypt = new JSEncrypt({default_key_size: 4096});
             crypt.getKey(function () {
+                //Send the data to the server with the user's private key encrypted with their decryption key
                 var decryptionKeyInput = $('#decryption-key');
                 $('#id_private_key').val(CryptoJS.AES.encrypt(crypt.getPrivateKey(), decryptionKeyInput.val()).toString());
                 $('#id_public_key').val(crypt.getPublicKey());
@@ -39,10 +43,13 @@ $("#register-next").click(function () {
     form.parsley().validate();
 });
 
+
+//Enable/disable two factor textbox.
 $("#id_two_factor").change(function () {
     if (this.checked) {
         $("#id_mobile_number").attr("required", true);
     } else {
         $("#id_mobile_number").removeAttr("required");
+        $("#id_mobile_number").val('');
     }
 });

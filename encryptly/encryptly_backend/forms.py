@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from encryptly_backend.models import UserProfile, ContactUsForm
 
 
+# Form used for user sign up - fields have special attributes for validation, etc.
 class UserForm(forms.ModelForm):
     username = forms.CharField(label="", widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': "Username", 'data-parsley-type': "alphanum", 'data-parsley-remote': reverse_lazy("user_exists"), 'data-parsley-remote-validator': "validateUsername", 'data-parsley-remote-options': '{ "type": "POST" }', 'data-parsley-remote-message': "This username appears to already exist."}), max_length=15)
     password = forms.CharField(label="", widget=forms.PasswordInput(attrs={'class': "form-control", 'placeholder': "Password"}), max_length=100, min_length=10, )
@@ -30,6 +31,7 @@ class UserForm(forms.ModelForm):
         return self.cleaned_data
 
 
+# Second form used for user sign up - fields have special attributes for validation.
 class ProfileForm(forms.ModelForm):
     public_key = forms.CharField(label="", widget=forms.Textarea(attrs={'class': "textbox-hidden", 'data-parsley-required': "false"}))
     private_key = forms.CharField(label="", widget=forms.Textarea(attrs={'class': "textbox-hidden", 'data-parsley-required': "false"}))
@@ -40,15 +42,16 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('public_key', 'private_key', 'two_factor', 'mobile_number')
-        
+
+
+# Allows the user to edit their userprofile
 class ProfileEditForm(forms.ModelForm):
-	class Meta:
-		model = UserProfile
-		fields = ('theme', 'two_factor', 'mobile_number')
-		
-	
+    class Meta:
+        model = UserProfile
+        fields = ('theme', 'two_factor', 'mobile_number')
 
 
+# Allows the user to send contact requests
 class ContactForm(forms.ModelForm):
     message = forms.CharField(widget=forms.Textarea(attrs={'class': "form-control"}), max_length=3000)
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': "form-control", 'placeholder': "(optional)"}), required=False)
