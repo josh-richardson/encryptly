@@ -28,8 +28,7 @@
 {#    {{ request.session.theme }}#}
     {% if request.session.theme %}
         {% static "" as baseUrl %}
-
-        <link href="{{ baseUrl }}/css/encryptly_theme_{{ request.session.theme }}.css" rel="stylesheet" class="theme_remove">
+        <link href="{{ baseUrl }}/css/theme{{ request.session.theme }}.css" rel="stylesheet" class="theme_remove">
     {% endif %}
     
 

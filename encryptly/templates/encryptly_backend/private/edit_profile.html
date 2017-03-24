@@ -13,7 +13,7 @@
 		<p class="profile-data">Username: {{ user }}</p>
 		<p class="profile-data">Two-factor authentication: {{ form.two_factor }} </p>
 		<p class="profile-data">Mobile number: {{ form.mobile_number }} </p>
-		<p class="profile-data">Theme: {{ form.theme }} </p>
+		<p class="profile-data"><a href="{% url 'themes' %}">Change Theme</a></p>
 		<input class="image-browser" type='submit' value='Save changes'/> or <a href="{% url 'delete_profile' %}">Delete</a>
 	</form>	
 	

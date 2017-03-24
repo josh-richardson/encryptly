@@ -1,6 +1,6 @@
 $("#theme_dark").click(function () {
     $(".theme_remove").remove();
-    $('head').append('<link href="/static/css/encryptly_theme_1.css" rel="stylesheet" class="theme_remove">');
+    $('head').append('<link href="/static/css/theme1.css" rel="stylesheet" class="theme_remove">');
     $.ajax({
         url:'/settheme/1/',
         type: 'GET',
