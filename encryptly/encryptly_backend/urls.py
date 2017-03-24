@@ -16,7 +16,9 @@ urlpatterns = [
     url(r'^login/$', views.public.login, name='login'),
     url(r'^register/$', views.public.register, name='register'),
 
-	url(r'^profile/$', views.private.user_profile, name='profile'),
+	url(r'^profile/$', views.private.edit_profile, name='profile'),
+	url(r'^delete/$', views.private.delete_profile, name="delete_profile"),
+#	url(r'^profile/edit/$', views.private.edit_profile, name='edit_profile'),
     url(r'^main/$', views.private.test_main, name='test_main'),
     url(r'^themes/$', views.private.themes, name='themes'),
 

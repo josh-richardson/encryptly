@@ -1,0 +1,17 @@
+{% extends 'encryptly_backend/public/public_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Delete Profile
+{% endblock %}
+
+{% block body_block %}
+
+	<h1>Confirm Delete</h1>
+	<form method='POST' action=".">{% csrf_token %}
+		<p>Are you sure you want to delete your profile: {{ prof.user }}?</p>
+		<input type='submit' value='Confirm'>
+		<a href="{% url 'profile' %}">Cancel</a>
+	</form>	
+	
+{% endblock %}
