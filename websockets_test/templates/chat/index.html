@@ -31,9 +31,11 @@
 
 <script type="text/javascript">
     var socket = null;
+    var conversations = {};
+    var targetUsers = [];
 
     socket = new WebSocket("ws://" + window.location.host + "/");
-    var targetUser;
+
     socket.onopen = function () {
         socketSend({"intent": "get_conversations"})
     };
@@ -63,23 +65,17 @@
         }
         console.log(data);
         if (data['intent'] == "get_conversations") {
-
+            conversations = {};
             data['conversations'].forEach(function (element) {
                 element.users = element.users.filter(function(item) {return item !== "{{ user.username }}"});
                 $('#friends').append("<a class='conversation' data-conversation='" + element.id + "' href='#' data-users='"+ element.users.join(",") +"'>Chat with: " + element.users.join(", ") + "</a><br />");
             });
 
             data['remaining_friends'].forEach(function (element) {
-                $('#friends').append("<a class='friend' href='#'>Friend: " + element + "</a><br />");
+                $('#friends').append("<a class='friend' href='#' data-users='" + element + "'>Friend: " + element + "</a><br />");
             });
 
-            $('.conversation').click(function () {
-                alert($(this).data("conversation"));
-            });
-
-            $('.friend').click(function () {
-
-            });
+            setConversationEvents();
         } else if (data['intent'] == "get_messages") {
             console.log(data);
 
@@ -87,6 +83,27 @@
             socketSend({"intent": "get_conversations"})
         }
     };
+
+
+    function setConversationEvents() {
+
+            $('.conversation').click(function () {
+                var conversation_id =$(this).data("conversation");
+                if (conversation_id in conversations) {
+
+
+                } else {
+                    console.log("fired:");
+                    socketSend({"intent": "get_messages", "conversation": conversation_id})
+                }
+
+            });
+
+            $('.friend').click(function () {
+                $("#chat").html("");
+                targetUsers = $(this).data("users").split(", ");
+            });
+    }
 
 </script>
 </body>
