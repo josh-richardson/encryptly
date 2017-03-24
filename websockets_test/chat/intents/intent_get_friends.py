@@ -8,7 +8,7 @@ from chat.intents.base_intent import BaseIntent
 
 class IntentGetFriends(BaseIntent):
     def __init__(self):
-        BaseIntent.__init__(self, "get_messages")
+        BaseIntent.__init__(self, "get_friends")
 
     def execute(self, message, message_data):
         Group("chat-%s" % message.user.username).send({

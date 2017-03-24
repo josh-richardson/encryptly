@@ -33,7 +33,7 @@
 <script type="text/javascript">
     var socket = null;
     var conversations = {};
-    var targetUsers = [];
+    var targetUser = null;
     var targetConversation = null;
 
     socket = new WebSocket("ws://" + window.location.host + "/");
@@ -51,6 +51,8 @@
     $('#submit').click(function () {
         var messageElement = $('#message');
         if (targetConversation != null) {
+            socketSend({"intent": "send_message", "content": messageElement.val(), "conversation": targetConversation});
+        } else if (targetUser != null) {
             socketSend({"intent": "send_message", "content": messageElement.val(), "username": targetUser});
         }
 
@@ -72,8 +74,10 @@
         if (data['intent'] == "get_conversations") {
             conversations = {};
             data['conversations'].forEach(function (element) {
-                element.users = element.users.filter(function(item) {return item !== "{{ user.username }}"});
-                $('#friends').append("<a class='conversation' data-conversation='" + element.id + "' href='#' data-users='"+ element.users.join(",") +"'>Chat with: " + element.users.join(", ") + "</a><br />");
+                element.users = element.users.filter(function (item) {
+                    return item !== "{{ user.username }}"
+                });
+                $('#friends').append("<a class='conversation' data-conversation='" + element.id + "' href='#' data-users='" + element.users.join(",") + "'>Chat with: " + element.users.join(", ") + "</a><br />");
             });
 
             data['remaining_friends'].forEach(function (element) {
@@ -82,32 +86,47 @@
 
             setConversationEvents();
         } else if (data['intent'] == "get_messages") {
-            console.log(data);
+            var conversation_id = data['conversation'];
+            conversations[conversation_id] = [];
+            console.log(data['messages']);
+            for (var msg in data['messages']) {
+                console.log(msg);
+                conversations[conversation_id].push(msg);
+                if (conversation_id == targetConversation) {
+                    $("#chat").append("<b>" + msg['username'] + "</b> says: " + msg['content']);
+                }
+            }
+
 
         } else if (data['intent'] == "add_friend" && data['success'] == true) {
             socketSend({"intent": "get_conversations"})
+
+        } else if (data['intent'] == "receive_message") {
+
         }
     };
 
 
     function setConversationEvents() {
 
-            $('.conversation').click(function () {
-                var conversation_id =$(this).data("conversation");
-                if (conversation_id in conversations) {
+        $('.conversation').click(function () {
+            var conversation_id = $(this).data("conversation");
+            targetConversation = conversation_id;
+            if (conversation_id in conversations) {
 
 
-                } else {
-                    socketSend({"intent": "get_messages", "conversation": conversation_id})
-                }
+            } else {
 
-            });
+                socketSend({"intent": "get_messages", "conversation": conversation_id})
+            }
 
-            $('.friend').click(function () {
-                $("#chat").html("");
-                targetUsers = $(this).data("users").split(", ");
-                $("#ccw").text("Currently chatting with: " + targetUsers.join(", "));
-            });
+        });
+
+        $('.friend').click(function () {
+            $("#chat").html("");
+            targetUser = $(this).data("users").split(", ")[0];
+            $("#ccw").text("Currently chatting with: " + targetUser);
+        });
     }
 
 </script>
