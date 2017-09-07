@@ -6,7 +6,6 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.js"
             integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-
 </head>
 <body>
 
@@ -19,22 +18,24 @@
      style="width: 500px; height: 500px; overflow-y:scroll; background-color: aliceblue; transform: translate(250px, -500px); margin: 0 100px 0 auto; display:block; float: left">
 
 </div>
-<br/>
-<input id="message" style="width: 442px" title="Your message:" placeholder="Your message"/>
-<button type="button" id="submit">Send</button>
+<div id="test" style="transform: translateY(-400px);">
+    <br/>
+    <input id="message" style="width: 442px" title="Your message:" placeholder="Your message"/>
+    <button type="button" id="submit">Send</button>
 
 
-<br/>
-<br/>
-<input id="friendName" style="width: 442px" title="Your message:" placeholder="Add friend"/>
-<button type="button" id="addFriend">Add</button>
-
+    <br/>
+    <br/>
+    <input id="friendName" style="width: 442px" title="Your message:" placeholder="Add friend"/>
+    <button type="button" id="addFriend">Add</button>
+</div>
 
 <script type="text/javascript">
     var socket = null;
     var conversations = {};
     var targetUser = null;
     var targetConversation = null;
+    var chatBox = $("#chat");
 
     socket = new WebSocket("ws://" + window.location.host + "/");
 
@@ -51,7 +52,11 @@
     $('#submit').click(function () {
         var messageElement = $('#message');
         if (targetConversation != null) {
-            socketSend({"intent": "send_message", "content": messageElement.val(), "conversation": targetConversation});
+            socketSend({
+                "intent": "send_message",
+                "content": messageElement.val(),
+                "conversation_id": targetConversation
+            });
         } else if (targetUser != null) {
             socketSend({"intent": "send_message", "content": messageElement.val(), "username": targetUser});
         }
@@ -83,47 +88,68 @@
             data['remaining_friends'].forEach(function (element) {
                 $('#friends').append("<a class='friend' href='#' data-users='" + element + "'>Friend: " + element + "</a><br />");
             });
-
             setConversationEvents();
         } else if (data['intent'] == "get_messages") {
+            chatBox.html("");
             var conversation_id = data['conversation'];
             conversations[conversation_id] = [];
-            console.log(data['messages']);
-            for (var msg in data['messages']) {
-                console.log(msg);
+            for (var i = 0; i < data['messages'].length; i++) {
+                var msg = data['messages'][i];
                 conversations[conversation_id].push(msg);
                 if (conversation_id == targetConversation) {
-                    $("#chat").append("<b>" + msg['username'] + "</b> says: " + msg['content']);
+                    chatBox.append("<b>" + msg['username'] + "</b> says: " + msg['content'] + "<br />");
                 }
             }
-
 
         } else if (data['intent'] == "add_friend" && data['success'] == true) {
             socketSend({"intent": "get_conversations"})
 
         } else if (data['intent'] == "receive_message") {
+            var conv_id = data['conversation_id'];
+            if (conv_id in conversations) {
+                conversations[conv_id].push({
+                    "content": data['content'],
+                    "username": data['username'],
+                    "time_sent": data['time_sent']
+                });
+            } else {
+                conversations[conv_id] = [];
+                conversations[conv_id].push({
+                    "content": data['content'],
+                    "username": data['username'],
+                    "time_sent": data['time_sent']
+                });
+            }
+            chatBox.append("<b>" + data['username'] + "</b> says: " + data['content'] + "<br />");
 
         }
     };
 
 
     function setConversationEvents() {
-
         $('.conversation').click(function () {
             var conversation_id = $(this).data("conversation");
             targetConversation = conversation_id;
             if (conversation_id in conversations) {
-
-
+                chatBox.html("");
+                for (var i = 0; i < conversations[conversation_id].length; i++) {
+                    var msg = conversations[conversation_id][i];
+                    if (conversation_id == targetConversation) {
+                        $("#chat").append("<b>" + msg['username'] + "</b> says: " + msg['content'] + "<br />");
+                    }
+                }
+                targetUser = $(this).data("users").split(", ")[0];
+                $("#ccw").text("Currently chatting with: " + targetUser);
             } else {
-
-                socketSend({"intent": "get_messages", "conversation": conversation_id})
+                targetUser = $(this).data("users").split(", ")[0];
+                $("#ccw").text("Currently chatting with: " + targetUser);
+                socketSend({"intent": "get_messages", "conversation": conversation_id});
             }
-
         });
 
         $('.friend').click(function () {
-            $("#chat").html("");
+            targetConversation = null;
+            chatBox.html("");
             targetUser = $(this).data("users").split(", ")[0];
             $("#ccw").text("Currently chatting with: " + targetUser);
         });

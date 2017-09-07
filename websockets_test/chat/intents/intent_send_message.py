@@ -23,7 +23,7 @@ class IntentSendMessage(BaseIntent):
             result = Conversation.objects.filter(id=conversation_id)
             if result.count() != 0:
                 conv = result.first()
-                if message.user in conv.participants:
+                if message.user in conv.participants.all():
                     to_return['success'] = True
                     new_message = Message()
                     new_message.content = message_data['content']
@@ -33,10 +33,8 @@ class IntentSendMessage(BaseIntent):
                     unixtime = time.mktime(new_message.date_sent.timetuple())
                     for p in conv.participants.all():
                         Group("chat-%s" % p.username).send({
-                            "text": json.dumps({"intent": "receive_message", "conversation_id": conversation_id, "content": message_data['content'], "date": unixtime})
+                            "text": json.dumps({"intent": "receive_message", "conversation_id": conversation_id, "content": message_data['content'], "date_sent": unixtime, "username": new_message.from_user.username})
                         })
-
-
                 else:
                     to_return['error'] = "You do not have access to this conversation."
 
@@ -60,7 +58,7 @@ class IntentSendMessage(BaseIntent):
                 for p in conv.participants.all():
                     print(("chat-%s" % p.username))
                     Group("chat-%s" % p.username).send({
-                        "text": json.dumps({"intent": "receive_message", "conversation_id": conv.id, "content": message_data['content'], "date": unixtime})
+                        "text": json.dumps({"intent": "receive_message", "conversation_id": conv.id, "content": message_data['content'], "date_sent": unixtime, "username": message.from_user.username})
                     })
             else:
                 to_return['error'] = "You cannot speak with this user as you are not friends with the user."
