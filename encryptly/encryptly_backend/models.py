@@ -6,8 +6,8 @@ from django_unixdatetimefield import UnixDateTimeField
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    private_key = models.CharField(max_length=8192)
-    public_key = models.CharField(max_length=8192)
+    private_key = models.TextField(max_length=8192)
+    public_key = models.TextField(max_length=8192)
     mobile_number = models.CharField(max_length=15, blank=True)
     two_factor = models.BooleanField(default=False)
     theme = models.IntegerField(default=0)
@@ -31,12 +31,12 @@ class Chat(models.Model):
     participants = models.ManyToManyField(UserProfile)
 
 class Message(models.Model):
-    content_type = models.CharField(max_length=8192)
-    content = models.CharField(max_length=8192)
+    content_type = models.TextField(max_length=8192)
+    content = models.TextField(max_length=8192)
     time_sent = UnixDateTimeField()
     sender = models.ForeignKey(UserProfile)
     chat = models.ForeignKey(Chat)
 
 class ContactUsForm(models.Model):
-    message = models.CharField(max_length=4096)
+    message = models.TextField(max_length=4096)
     email = models.EmailField(blank=True, null=True)
